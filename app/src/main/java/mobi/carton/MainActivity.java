@@ -1,9 +1,10 @@
 package mobi.carton;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import mobi.carton.library.CartonActivity;
+
+public class MainActivity extends CartonActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
