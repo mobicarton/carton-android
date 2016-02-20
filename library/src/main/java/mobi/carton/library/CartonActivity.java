@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -50,5 +51,33 @@ public class CartonActivity extends Activity {
         layoutParams.y = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 10, dm);
 
         window.setAttributes(layoutParams);
+    }
+
+
+    @Override
+    public void setContentView(int layoutResID) {
+        this.setContentView(
+                getLayoutInflater().inflate(layoutResID, null)
+        );
+    }
+
+
+    @Override
+    public void setContentView(View view) {
+        this.setContentView(
+                view,
+                new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+        );
+    }
+
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
+        frameLayout.addView(view);
+        super.setContentView(frameLayout, params);
     }
 }
