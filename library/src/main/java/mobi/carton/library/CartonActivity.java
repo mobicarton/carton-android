@@ -15,6 +15,9 @@ import android.view.WindowManager;
 public class CartonActivity extends Activity {
 
 
+    private boolean mDebug = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,11 @@ public class CartonActivity extends Activity {
     }
 
 
+    public void setDebug() {
+        mDebug = true;
+    }
+
+
     @Override
     public void setContentView(int layoutResID) {
         this.setContentView(
@@ -76,6 +84,10 @@ public class CartonActivity extends Activity {
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
+        if (mDebug) {
+            super.setContentView(view, params);
+            return;
+        }
         MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
         frameLayout.addView(view);
         super.setContentView(frameLayout, params);
