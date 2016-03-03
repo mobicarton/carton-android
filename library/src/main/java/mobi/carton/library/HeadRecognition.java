@@ -26,8 +26,8 @@ public class HeadRecognition
     public static final int TILT_RIGHT = 0;
     public static final int TILT_LEFT = 1;
 
-
     private static final int TILT_TIME = 1000; // millisecond
+    private static final int TILT_THRESHOLD = 25;
 
 
     private SensorManager mSensorManager;
@@ -61,10 +61,10 @@ public class HeadRecognition
 
             // TODO: use directly radian instead of degree to avoid some useless computing
             if (tiltTime == -1) {
-                if (mPitch >= 25) {
+                if (mPitch >= TILT_THRESHOLD) {
                     tiltTime = System.currentTimeMillis();
                     tiltSide = TILT_RIGHT;
-                } else if (mPitch <= -25) {
+                } else if (mPitch <= -TILT_THRESHOLD) {
                     tiltTime = System.currentTimeMillis();
                     tiltSide = TILT_LEFT;
                 }

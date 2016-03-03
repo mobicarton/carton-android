@@ -58,10 +58,13 @@ public class MainActivity extends CartonActivity
 
     @Override
     public void onTilt(int direction) {
-        if (direction == 0)
-            mViewPager.nextPage();
-
-        if (direction == 1)
-            mViewPager.previousPage();
+        switch (direction) {
+            case HeadRecognition.TILT_RIGHT:
+                mViewPager.nextPage();
+                break;
+            case HeadRecognition.TILT_LEFT:
+                mViewPager.previousPage();
+                break;
+        }
     }
 }
