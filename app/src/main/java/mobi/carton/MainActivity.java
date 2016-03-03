@@ -67,4 +67,17 @@ public class MainActivity extends CartonActivity
                 break;
         }
     }
+
+
+    @Override
+    public void onNod(int direction) {
+        switch (direction) {
+            case HeadRecognition.NOD_DOWN:
+                mViewPager.nextPage();
+                break;
+            case HeadRecognition.NOD_UP:
+                mViewPager.previousPage();
+                break;
+        }
+    }
 }

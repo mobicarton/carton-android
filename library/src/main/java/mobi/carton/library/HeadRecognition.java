@@ -20,11 +20,12 @@ public class HeadRecognition
     public interface OnHeadGestureListener {
 
         void onTilt(int direction);
+        void onNod(int direction);
     }
 
 
     public interface OnHeadTrackingListener {
-        
+
         void onDirectionChanged(int azimuth, int pitch, int roll);
     }
 
@@ -34,6 +35,12 @@ public class HeadRecognition
 
     private static final int TILT_TIME = 1000; // millisecond
     private static final int TILT_THRESHOLD = 25;
+
+    public static final int NOD_UP = 2;
+    public static final int NOD_DOWN = 3;
+
+    private static final int NOD_TIME = 1000;
+    private static final int NOD_THRESHOLD = 25;
 
 
     private SensorManager mSensorManager;
@@ -52,6 +59,10 @@ public class HeadRecognition
     private int tiltSide = -1;
 
 
+    private long nodTime = -1;
+    private int nodSide = -1;
+
+
     public HeadRecognition(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
     }
@@ -65,6 +76,7 @@ public class HeadRecognition
             mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[0]) + 360) % 360;
             mPitch = (int) (Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[1]));
             mRoll = (int) Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[2]);
+            mRoll = mRoll < 0 ? mRoll + 180 : mRoll - 180;
 
             if (mOnHeadTrackingListener != null)
                 mOnHeadTrackingListener.onDirectionChanged(mAzimuth, mPitch, mRoll);
@@ -86,6 +98,25 @@ public class HeadRecognition
                         mOnHeadGestureListener.onTilt(tiltSide);
                 }
                 tiltTime = -1;
+            }
+
+
+            if (nodTime == -1) {
+                if (mRoll >= NOD_THRESHOLD) {
+                    nodTime = System.currentTimeMillis();
+                    nodSide = NOD_UP;
+                } else if (mRoll <= -NOD_THRESHOLD) {
+                    nodTime = System.currentTimeMillis();
+                    nodSide = NOD_DOWN;
+                }
+            }
+            if (nodTime != -1 && (mRoll <= 5 && mRoll >= -5)) {
+                long delay = System.currentTimeMillis() - nodTime;
+                if (delay <= NOD_TIME) {
+                    if (mOnHeadGestureListener != null)
+                        mOnHeadGestureListener.onNod(nodSide);
+                }
+                nodTime = -1;
             }
         }
     }
