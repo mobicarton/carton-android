@@ -1,9 +1,9 @@
 package mobi.carton.library;
 
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CartonActivity extends Activity {
+public class CartonActivity extends FragmentActivity {
 
 
     private boolean mDebug = false;
