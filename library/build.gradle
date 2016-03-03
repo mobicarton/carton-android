@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
     }
     buildTypes {
         release {
@@ -21,5 +21,31 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
+ext {
+    // Where you will see your artifact in Bintray's web interface
+    // The "bintrayName" should match the name of the Bintray repro.
+    bintrayRepo = 'maven'
+    bintrayName = 'carton'
+
+    // Maven metadata
+    publishedGroupId = 'mobi.carton'
+    libraryName = 'Carton'
+    // Save yourself a head ache, and set this equal to the name of the Android Studio library
+    // module. The artifact name needs to match the name of the library.
+    artifact = 'library'
+
+    libraryDescription = 'The Carton SDK for Android enable you to quickly start creating AR apps or adapt your existing application for AR.'
+    libraryVersion = '0.0.1'
+
+    developerId = 'makowildcat'
+    developerName = 'Damien Brun'
+    developerEmail = 'makowildcat@gmail.com'
+}
+
+apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/bintrayv1.gradle'
+dependencies {
+    compile 'com.android.support:support-v4:23.2.0'
 }
