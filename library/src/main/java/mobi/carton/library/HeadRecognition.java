@@ -23,6 +23,12 @@ public class HeadRecognition
     }
 
 
+    public interface OnHeadTrackingListener {
+        
+        void onDirectionChanged(int azimuth, int pitch, int roll);
+    }
+
+
     public static final int TILT_RIGHT = 0;
     public static final int TILT_LEFT = 1;
 
@@ -33,6 +39,7 @@ public class HeadRecognition
     private SensorManager mSensorManager;
 
     private OnHeadGestureListener mOnHeadGestureListener;
+    private OnHeadTrackingListener mOnHeadTrackingListener;
 
     private float[] orientation = new float[3];
     private float[] rotationMatrix = new float[9];
@@ -59,6 +66,9 @@ public class HeadRecognition
             mPitch = (int) (Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[1]));
             mRoll = (int) Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[2]);
 
+            if (mOnHeadTrackingListener != null)
+                mOnHeadTrackingListener.onDirectionChanged(mAzimuth, mPitch, mRoll);
+
             // TODO: use directly radian instead of degree to avoid some useless computing
             if (tiltTime == -1) {
                 if (mPitch >= TILT_THRESHOLD) {
@@ -69,11 +79,11 @@ public class HeadRecognition
                     tiltSide = TILT_LEFT;
                 }
             }
-
             if (tiltTime != -1 && (mPitch <= 5 && mPitch >= -5)) {
                 long delay = System.currentTimeMillis() - tiltTime;
                 if (delay <= TILT_TIME) {
-                    mOnHeadGestureListener.onTilt(tiltSide);
+                    if (mOnHeadGestureListener != null)
+                        mOnHeadGestureListener.onTilt(tiltSide);
                 }
                 tiltTime = -1;
             }
@@ -98,7 +108,17 @@ public class HeadRecognition
     }
 
 
+    /*
+    SETTERS
+     */
+
+
     public void setOnHeadGestureListener(OnHeadGestureListener l) {
         mOnHeadGestureListener = l;
+    }
+
+
+    public void setOnHeadTrackingListener(OnHeadTrackingListener l) {
+        mOnHeadTrackingListener = l;
     }
 }
