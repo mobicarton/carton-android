@@ -9,6 +9,21 @@
       "name": "Shoreline Amphitheatre",
       "latitude": 37.426778,
       "longitude": -122.080733
+    },
+    {
+      "name": "Université du Québec à Montréal",
+      "latitude": 45.5126,
+      "longitude": -73.560595
+    },
+    {
+      "name": "Laboratoire en Informatique Cognitive et Environnements de Formation",
+      "latitude": 45.530214,
+      "longitude": -73.59867
+    },
+    {
+      "name": "GamePlay Space",
+      "latitude": 45.505841,
+      "longitude": -73.568115
     }
   ]
 }

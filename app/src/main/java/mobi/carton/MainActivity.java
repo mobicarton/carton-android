@@ -7,6 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
@@ -29,7 +30,7 @@ public class MainActivity extends CartonActivity
         List<Fragment> fragments = new ArrayList<>();
 
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
 
         PagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
