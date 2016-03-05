@@ -1,0 +1,17 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+
+    <TextView
+        android:id="@+id/subtitle_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/textPrimary"
+        android:fontFamily="sans-serif-light"
+        android:textSize="16sp"/>
+
+</RelativeLayout>

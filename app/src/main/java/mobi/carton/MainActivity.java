@@ -10,6 +10,7 @@ import java.util.List;
 import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
+import mobi.carton.subtitle.SubtitleFragment;
 
 public class MainActivity extends CartonActivity
         implements HeadRecognition.OnHeadGestureListener {
@@ -31,6 +32,7 @@ public class MainActivity extends CartonActivity
 
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 
         PagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
