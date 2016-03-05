@@ -8,14 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import mobi.carton.PageFragment;
 import mobi.carton.R;
+import mobi.carton.csr.ContinuousSpeechRecognition;
 
-public class SubtitleFragment extends PageFragment {
+public class SubtitleFragment extends PageFragment
+        implements
+        ContinuousSpeechRecognition.OnTextListener {
 
 
     private RecyclerView mRecyclerView;
     private SubtitleAdapter mSubtitleAdapter;
+
+    private ContinuousSpeechRecognition mContinuousSpeechRecognition;
 
 
     @Override
@@ -32,12 +39,45 @@ public class SubtitleFragment extends PageFragment {
         mSubtitleAdapter = new SubtitleAdapter();
         mRecyclerView.setAdapter(mSubtitleAdapter);
 
+        mContinuousSpeechRecognition = new ContinuousSpeechRecognition(getContext());
+        mContinuousSpeechRecognition.setOnTextListener(this);
+
         return rootView;
+    }
+
+
+    @Override
+    public void onResumePage() {
+        mContinuousSpeechRecognition.start();
+    }
+
+
+    @Override
+    public void onPausePage() {
+        mContinuousSpeechRecognition.stop();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mContinuousSpeechRecognition.destroy();
     }
 
 
     public void addSubtitle(String subtitle) {
         mSubtitleAdapter.add(subtitle);
         mRecyclerView.scrollToPosition(0);
+    }
+
+
+    @Override
+    public void onTextMatched(ArrayList<String> matchedText) {
+        addSubtitle(matchedText.get(0));
+    }
+
+
+    @Override
+    public void onError(int error) {
     }
 }
