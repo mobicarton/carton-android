@@ -8,6 +8,13 @@ import android.util.AttributeSet;
 public class CustomViewPager extends ViewPager {
 
 
+    public interface ViewPagerLifecycle {
+
+        void onResumePage();
+        void onPausePage();
+    }
+
+
     public CustomViewPager(Context context) {
         super(context);
     }
