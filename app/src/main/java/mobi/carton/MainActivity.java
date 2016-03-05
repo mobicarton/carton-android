@@ -39,6 +39,8 @@ public class MainActivity extends CartonActivity
         mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager);
         mViewPager.setAdapter(pagerAdapter);
 
+        ViewPagerIndicators viewPagerIndicators = (ViewPagerIndicators) findViewById(R.id.viewPagerIndicators);
+        viewPagerIndicators.setViewPager(mViewPager);
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
