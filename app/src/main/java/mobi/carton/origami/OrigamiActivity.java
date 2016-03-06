@@ -1,5 +1,6 @@
 package mobi.carton.origami;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -11,9 +12,17 @@ import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
+import mobi.carton.library.HeadRecognition;
 
 
-public class OrigamiActivity extends CartonActivity {
+public class OrigamiActivity extends CartonActivity
+        implements HeadRecognition.OnHeadGestureListener {
+
+
+    private ArrayList<Origami> mOrigamis;
+    private CustomViewPager mViewPager;
+
+    private HeadRecognition mHeadRecognition;
 
 
     @Override
@@ -25,18 +34,36 @@ public class OrigamiActivity extends CartonActivity {
 
         List<Fragment> fragments = new ArrayList<>();
 
-        for (Origami origami : getListOrigami()) {
+        mOrigamis = getListOrigami();
+        for (Origami origami : mOrigamis) {
             fragments.add(OrigamiFragment.newInstance(origami));
         }
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        CustomViewPager viewPager = (CustomViewPager) super.findViewById(R.id.viewPager_Origami);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        viewPager.setOffscreenPageLimit(3);
+        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager_Origami);
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        mViewPager.setOffscreenPageLimit(3);
         final float scale = getResources().getDisplayMetrics().density;
-        viewPager.setPageMargin((int) -(40 * scale + 0.5f));
+        mViewPager.setPageMargin((int) -(40 * scale + 0.5f));
+
+        mHeadRecognition = new HeadRecognition(this);
+        mHeadRecognition.setOnHeadGestureListener(this);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHeadRecognition.start();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHeadRecognition.stop();
     }
 
 
@@ -50,5 +77,32 @@ public class OrigamiActivity extends CartonActivity {
         origamis.add(new Origami("Tulip", "Andrew Hudson", 23));
 
         return origamis;
+    }
+
+
+    @Override
+    public void onTilt(int direction) {
+        switch (direction) {
+            case HeadRecognition.TILT_RIGHT:
+                mViewPager.nextPage();
+                break;
+            case HeadRecognition.TILT_LEFT:
+                mViewPager.previousPage();
+                break;
+        }
+    }
+
+
+    @Override
+    public void onNod(int direction) {
+        switch (direction) {
+            case HeadRecognition.NOD_DOWN:
+                Intent intent = new Intent(this, OrigamiStepsActivity.class);
+                intent.putExtra(OrigamiStepsActivity.EXTRA_NAME, mOrigamis.get(mViewPager.getCurrentItem()).getName());
+                startActivity(intent);
+                break;
+            case HeadRecognition.NOD_UP:
+                break;
+        }
     }
 }
