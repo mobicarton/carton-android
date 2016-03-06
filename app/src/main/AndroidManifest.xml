@@ -28,6 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".origami.OrigamiActivity"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>
