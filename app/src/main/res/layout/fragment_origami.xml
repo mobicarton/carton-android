@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@drawable/border"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textView_origamiName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_large"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/textView_origamiNbSteps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_normal"
+            android:fontFamily="sans-serif-light"
+            android:layout_below="@+id/textView_origamiName"/>
+
+        <ImageView
+            android:id="@+id/imageView_cc"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/cc_logo"/>
+
+        <TextView
+            android:id="@+id/textView_origamiAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/imageView_cc"
+            android:layout_marginLeft="4dp"
+            android:textSize="@dimen/font_small"
+            android:fontFamily="sans-serif-light"/>
+
+        <ImageView
+            android:id="@+id/imageView_origamiFinished"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/tulip_finished"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

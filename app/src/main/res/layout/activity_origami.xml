@@ -8,7 +8,7 @@
 
 
     <mobi.carton.CustomViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewPager_Origami"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

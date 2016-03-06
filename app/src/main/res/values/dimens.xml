@@ -5,6 +5,9 @@
 
     <dimen name="clockSize">48sp</dimen>
 
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_normal">16sp</dimen>
+    <dimen name="font_large">22sp</dimen>
     <dimen name="font_extra_large">32sp</dimen>
 
 </resources>
