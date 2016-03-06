@@ -10,7 +10,7 @@ import mobi.carton.PageFragment;
 import mobi.carton.R;
 
 
-public class OrigamiFragment extends PageFragment {
+public class OrigamiMenuFragment extends PageFragment {
 
 
     @Override
