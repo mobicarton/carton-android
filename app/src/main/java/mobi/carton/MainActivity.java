@@ -1,15 +1,21 @@
 package mobi.carton;
 
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
+import mobi.carton.library.CartonSdk;
 import mobi.carton.subtitle.SubtitleFragment;
 
 public class MainActivity extends CartonActivity
@@ -38,6 +44,16 @@ public class MainActivity extends CartonActivity
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
+
+        PackageManager packageManager = getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(CartonSdk.CATEGORY);
+        List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
+        Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
+        for(ResolveInfo info : resolveInfos) {
+            ApplicationInfo applicationInfo = info.activityInfo.applicationInfo;
+            fragments.add(AppFragment.newInstance(applicationInfo));
+        }
 
         mPagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
