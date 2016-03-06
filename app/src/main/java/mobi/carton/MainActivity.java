@@ -16,6 +16,7 @@ import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 import mobi.carton.library.CartonSdk;
+import mobi.carton.origami.OrigamiFragment;
 import mobi.carton.subtitle.SubtitleFragment;
 
 public class MainActivity extends CartonActivity
@@ -42,6 +43,7 @@ public class MainActivity extends CartonActivity
         List<Fragment> fragments = new ArrayList<>();
 
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, OrigamiFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 

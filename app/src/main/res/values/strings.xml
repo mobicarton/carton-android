@@ -38,4 +38,12 @@
     -->
     <string name="icon">Icon</string>
 
+    <!--
+    Origami
+    -->
+
+    <string name="origami_title">Origami</string>
+    <string name="origami_japan">折り紙</string>
+
+
 </resources>
