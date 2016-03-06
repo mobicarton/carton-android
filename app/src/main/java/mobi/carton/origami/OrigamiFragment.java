@@ -19,13 +19,13 @@ public class OrigamiFragment extends Fragment {
     private static final String ARG_AUTHOR = "arg_author";
 
 
-    public static OrigamiFragment newInstance(String name, String author, int nbSteps) {
+    public static OrigamiFragment newInstance(Origami origami) {
         OrigamiFragment fragment = new OrigamiFragment();
 
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, name);
-        args.putString(ARG_AUTHOR, author);
-        args.putInt(ARG_NB_STEPS, nbSteps);
+        args.putString(ARG_NAME, origami.getName());
+        args.putString(ARG_AUTHOR, origami.getAuthor());
+        args.putInt(ARG_NB_STEPS, origami.getNbSteps());
 
         fragment.setArguments(args);
 

@@ -25,11 +25,9 @@ public class OrigamiActivity extends CartonActivity {
 
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(OrigamiFragment.newInstance("Frog", "Andrew Hudson", 17));
-        fragments.add(OrigamiFragment.newInstance("Cranevar", "Andrew Hudson", 26));
-        fragments.add(OrigamiFragment.newInstance("Tulip", "Andrew Hudson", 23));
-        fragments.add(OrigamiFragment.newInstance("Mouse", "Tavin", 14));
-        fragments.add(OrigamiFragment.newInstance("Lily", "Tavin", 25));
+        for (Origami origami : getListOrigami()) {
+            fragments.add(OrigamiFragment.newInstance(origami));
+        }
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
@@ -39,5 +37,18 @@ public class OrigamiActivity extends CartonActivity {
         viewPager.setOffscreenPageLimit(3);
         final float scale = getResources().getDisplayMetrics().density;
         viewPager.setPageMargin((int) -(40 * scale + 0.5f));
+    }
+
+
+    private ArrayList<Origami> getListOrigami() {
+        ArrayList<Origami> origamis = new ArrayList<>();
+
+        origamis.add(new Origami("Cranevar", "Andrew Hudson", 26));
+        origamis.add(new Origami("Frog", "Andrew Hudson", 17));
+        origamis.add(new Origami("Lily", "Tavin", 25));
+        origamis.add(new Origami("Mouse", "Tavin", 14));
+        origamis.add(new Origami("Tulip", "Andrew Hudson", 23));
+
+        return origamis;
     }
 }
