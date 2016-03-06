@@ -4,6 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="android:background">@color/backgroundDefault</item>
+
+        <item name="android:textColor">@color/textPrimary</item>
     </style>
 
 </resources>

@@ -4,4 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="clockSize">48sp</dimen>
+
+    <dimen name="font_extra_large">32sp</dimen>
+
 </resources>

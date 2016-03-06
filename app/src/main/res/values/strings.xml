@@ -32,4 +32,10 @@
         landmark and its distance in kilometers. [CHAR LIMIT=45] -->
     <string name="place_text_format">%1$s (%2$s km)</string>
 
+
+    <!--
+    Compatible Apps
+    -->
+    <string name="icon">Icon</string>
+
 </resources>
