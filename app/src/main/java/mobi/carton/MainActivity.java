@@ -75,6 +75,8 @@ public class MainActivity extends CartonActivity
     protected void onResume() {
         super.onResume();
         mHeadRecognition.start();
+        CustomViewPager.ViewPagerLifecycle currentPage = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(mCurrentPagePosition);
+        currentPage.onResumePage();
     }
 
 
@@ -82,6 +84,8 @@ public class MainActivity extends CartonActivity
     protected void onPause() {
         super.onPause();
         mHeadRecognition.stop();
+        CustomViewPager.ViewPagerLifecycle currentPage = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(mCurrentPagePosition);
+        currentPage.onPausePage();
     }
 
 

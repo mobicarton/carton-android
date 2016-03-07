@@ -32,20 +32,6 @@ public class OrigamiMenuFragment extends PageFragment
 
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mHeadRecognition.stop();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mHeadRecognition.start();
-    }
-
-
-    @Override
     public void onResumePage() {
         mHeadRecognition.start();
     }
