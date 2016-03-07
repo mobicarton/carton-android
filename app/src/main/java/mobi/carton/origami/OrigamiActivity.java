@@ -97,8 +97,10 @@ public class OrigamiActivity extends CartonActivity
     public void onNod(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_DOWN:
+                Origami origami = mOrigamis.get(mViewPager.getCurrentItem());
                 Intent intent = new Intent(this, OrigamiStepsActivity.class);
-                intent.putExtra(OrigamiStepsActivity.EXTRA_NAME, mOrigamis.get(mViewPager.getCurrentItem()).getName());
+                intent.putExtra(OrigamiStepsActivity.EXTRA_NAME, origami.getName());
+                intent.putExtra(OrigamiStepsActivity.EXTRA_NB_STEPS, origami.getNbSteps());
                 startActivity(intent);
                 break;
             case HeadRecognition.NOD_UP:

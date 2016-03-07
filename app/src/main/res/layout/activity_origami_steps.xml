@@ -10,7 +10,17 @@
     <mobi.carton.CustomViewPager
         android:id="@+id/viewPager_OrigamiSteps"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_line"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"/>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_above="@+id/textView_origamiName"/>
 
     <TextView
         android:id="@+id/textView_origamiName"
@@ -20,6 +30,6 @@
         android:fontFamily="sans-serif-light"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"/>
+        android:layout_margin="4dp"/>
 
 </RelativeLayout>

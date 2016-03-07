@@ -2,8 +2,14 @@ package mobi.carton.origami;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import mobi.carton.CustomViewPager;
+import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.library.CartonActivity;
 
@@ -12,6 +18,11 @@ public class OrigamiStepsActivity extends CartonActivity{
 
 
     public final static String EXTRA_NAME = "extra_name";
+    public final static String EXTRA_NB_STEPS = "extra_nb_steps";
+
+
+    private CustomViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +36,21 @@ public class OrigamiStepsActivity extends CartonActivity{
 
         TextView textViewName = (TextView) findViewById(R.id.textView_origamiName);
         textViewName.setText(name);
+
+        List<Fragment> fragments = new ArrayList<>();
+
+        int nbSteps = intent.getIntExtra(EXTRA_NB_STEPS, 1);
+        int resourceId;
+        for (int i = 1; i <= nbSteps; i++) {
+            resourceId = getResources().getIdentifier(name.toLowerCase().concat("_step_").concat(Integer.toString(i)), "drawable", getPackageName());
+            fragments.add(StepFragment.newInstance(i, resourceId));
+        }
+
+        fragments.add(StepFragment.newInstance(0, getResources().getIdentifier(name.toLowerCase().concat("_finished"), "drawable", getPackageName())));
+
+        MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
+
+        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager_OrigamiSteps);
+        mViewPager.setAdapter(pagerAdapter);
     }
 }
