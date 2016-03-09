@@ -104,6 +104,7 @@ public class OrigamiActivity extends CartonActivity
                 startActivity(intent);
                 break;
             case HeadRecognition.NOD_UP:
+                onBackPressed();
                 break;
         }
     }
