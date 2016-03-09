@@ -15,6 +15,17 @@
         android:contentDescription="@string/icon"/>
 
     <TextView
+        android:id="@+id/textView_appDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_appIcon"
+        android:layout_toRightOf="@+id/imageView_appIcon"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif-light"
+        android:textSize="@dimen/font_small"/>
+
+    <TextView
         android:id="@+id/textView_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

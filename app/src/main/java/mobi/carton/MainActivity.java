@@ -14,8 +14,8 @@ import java.util.List;
 
 import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
-import mobi.carton.library.HeadRecognition;
 import mobi.carton.library.CartonSdk;
+import mobi.carton.library.HeadRecognition;
 import mobi.carton.origami.OrigamiMenuFragment;
 import mobi.carton.subtitle.SubtitleFragment;
 
@@ -45,7 +45,6 @@ public class MainActivity extends CartonActivity
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, OrigamiMenuFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 
         PackageManager packageManager = getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -54,8 +53,10 @@ public class MainActivity extends CartonActivity
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         for(ResolveInfo info : resolveInfos) {
             ApplicationInfo applicationInfo = info.activityInfo.applicationInfo;
-            fragments.add(AppFragment.newInstance(applicationInfo));
+            fragments.add(AppCompatibleFragment.newInstance(applicationInfo));
         }
+
+        fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 
         mPagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 

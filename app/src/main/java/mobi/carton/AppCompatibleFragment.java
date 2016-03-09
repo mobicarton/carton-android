@@ -14,7 +14,7 @@ import android.widget.TextView;
 import mobi.carton.library.HeadRecognition;
 
 
-public class AppFragment extends PageFragment
+public class AppCompatibleFragment extends PageFragment
         implements
         HeadRecognition.OnHeadGestureListener {
 
@@ -25,8 +25,8 @@ public class AppFragment extends PageFragment
     private Intent mIntent;
 
 
-    public static AppFragment newInstance(ApplicationInfo applicationInfo) {
-        AppFragment fragment = new AppFragment();
+    public static AppCompatibleFragment newInstance(ApplicationInfo applicationInfo) {
+        AppCompatibleFragment fragment = new AppCompatibleFragment();
 
         Bundle args = new Bundle();
         args.putParcelable(ARG_APP_INFO, applicationInfo);
@@ -37,7 +37,7 @@ public class AppFragment extends PageFragment
     }
 
 
-    public AppFragment() {
+    public AppCompatibleFragment() {
 
     }
 
@@ -45,17 +45,19 @@ public class AppFragment extends PageFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_app, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_app_compatible, container, false);
 
         PackageManager packageManager = getActivity().getPackageManager();
         ApplicationInfo applicationInfo = getArguments().getParcelable(ARG_APP_INFO);
 
-        TextView textView = (TextView) rootView.findViewById(R.id.textView_appName);
+        TextView textViewName = (TextView) rootView.findViewById(R.id.textView_appName);
+        TextView textViewDescription = (TextView) rootView.findViewById(R.id.textView_appDescription);
         ImageView imageView = (ImageView) rootView.findViewById(R.id.imageView_appIcon);
 
         if (applicationInfo != null) {
             imageView.setImageDrawable(applicationInfo.loadIcon(packageManager));
-            textView.setText(applicationInfo.loadLabel(packageManager));
+            textViewName.setText(applicationInfo.loadLabel(packageManager));
+            textViewDescription.setText(applicationInfo.loadDescription(packageManager));
             mIntent = packageManager.getLaunchIntentForPackage(applicationInfo.packageName);
         }
 
