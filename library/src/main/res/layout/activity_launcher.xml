@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="32dp"
+    tools:context=".LauncherActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView_schema"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textView_advice"
+        android:contentDescription="@string/text_launch_advice"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"/>
+
+
+    <TextView
+        android:id="@+id/textView_advice"
+        style="@style/textView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:textSize="18sp"
+        android:text="@string/text_launch_advice"/>
+
+
+    <TextView
+        android:id="@+id/textView_without"
+        android:layout_above="@+id/textView_visit"
+        style="@style/textView"
+        android:text="@string/text_without"/>
+
+
+    <TextView
+        android:id="@+id/textView_visit"
+        style="@style/textView"
+        android:layout_above="@+id/button_try"
+        android:layout_marginBottom="12dp"
+        android:text="@string/text_visit"
+        android:onClick="clickVisit"/>
+
+
+    <Button
+        android:id="@+id/button_try"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:text="@string/button_try"
+        android:onClick="clickWithout"/>
+
+</RelativeLayout>

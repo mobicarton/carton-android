@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Library</string>
+
+    <string name="text_launch_advice">Place your phone into your Carton</string>
+    <string name="text_without">You don\'t have any Carton ?"</string>
+    <string name="text_visit">visit <u>carton.mobi</u> and build your own</string>
+
+    <string name="button_try">or try without</string>
+
+    <string name="contentDescription_carton">Carton</string>
+
+    <string name="carton_website">http://carton.mobi</string>
+
 </resources>
