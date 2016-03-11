@@ -33,7 +33,6 @@ public class OrigamiStepsActivity extends CartonActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setDebug();
         setContentView(R.layout.activity_origami_steps);
 
         Intent intent = getIntent();

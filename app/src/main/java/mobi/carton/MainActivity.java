@@ -37,7 +37,8 @@ public class MainActivity extends CartonActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setDebug();
+        startDefaultLauncher();
+
         setContentView(R.layout.activity_main);
 
         List<Fragment> fragments = new ArrayList<>();

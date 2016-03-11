@@ -29,7 +29,6 @@ public class OrigamiActivity extends CartonActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setDebug();
         setContentView(R.layout.activity_origami);
 
         List<Fragment> fragments = new ArrayList<>();
