@@ -57,7 +57,7 @@ public class LauncherActivity extends Activity
     public void clickWithout(View v) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_WITHOUT, true);
-        setResult(CODE_LAUNCHER, intent);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -67,7 +67,7 @@ public class LauncherActivity extends Activity
         if ((pitch < 10 && pitch > -10) && (roll < 10 && roll > - 10)){
             Intent intent = new Intent();
             intent.putExtra(EXTRA_WITHOUT, false);
-            setResult(CODE_LAUNCHER, intent);
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
