@@ -88,4 +88,16 @@ public class CartonActivity extends FragmentActivity {
         frameLayout.addView(view);
         super.setContentView(frameLayout, params);
     }
+
+
+    @Override
+    public void addContentView(View view, ViewGroup.LayoutParams params) {
+        if (mDebug) {
+            super.setContentView(view, params);
+            return;
+        }
+        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
+        frameLayout.addView(view);
+        super.setContentView(frameLayout, params);
+    }
 }
