@@ -1,6 +1,7 @@
 package mobi.carton.library;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
@@ -14,7 +15,11 @@ import android.view.WindowManager;
 public class CartonActivity extends FragmentActivity {
 
 
+    private static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
+
     private boolean mDebug = false;
+
+    private boolean mNoLauncher;
 
 
     @Override
@@ -50,11 +55,42 @@ public class CartonActivity extends FragmentActivity {
         layoutParams.y = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 10, dm);
 
         window.setAttributes(layoutParams);
+
+        mDebug = CartonPrefs.getWithoutCarton(getApplicationContext());
+
+        mNoLauncher = getIntent().getBooleanExtra(EXTRA_NO_LAUNCHER, false);
     }
 
 
     public void setDebug() {
         mDebug = true;
+    }
+
+
+    public void startDefaultLauncher() {
+        if (!mNoLauncher) {
+            Intent intent = new Intent(this, LauncherActivity.class);
+            startActivityForResult(intent, LauncherActivity.CODE_LAUNCHER);
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LauncherActivity.CODE_LAUNCHER) {
+            if (resultCode == RESULT_OK) {
+                boolean without = data.getBooleanExtra(LauncherActivity.EXTRA_WITHOUT, false);
+                CartonPrefs.setWithoutCarton(getApplicationContext(), without);
+                // "recreate" activity because setContentView (onCreate) already called
+                Intent intent = getIntent();
+                intent.putExtra(EXTRA_NO_LAUNCHER, true);
+                finish();
+                startActivity(intent);
+            } else if (resultCode == RESULT_CANCELED) {
+                finish();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
