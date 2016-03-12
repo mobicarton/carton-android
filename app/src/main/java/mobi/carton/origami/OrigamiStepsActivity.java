@@ -3,6 +3,8 @@ package mobi.carton.origami;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,7 +18,9 @@ import mobi.carton.library.HeadRecognition;
 
 
 public class OrigamiStepsActivity extends CartonActivity
-        implements HeadRecognition.OnHeadGestureListener {
+        implements
+        HeadRecognition.OnHeadGestureListener,
+        ViewPager.OnPageChangeListener {
 
 
     public final static String EXTRA_NAME = "extra_name";
@@ -25,6 +29,8 @@ public class OrigamiStepsActivity extends CartonActivity
 
     private CustomViewPager mViewPager;
     private int mNbSteps;
+    private TextView mTextViewStepPosition;
+    private ImageView mImageViewStepPosition;
 
     private HeadRecognition mHeadRecognition;
 
@@ -54,8 +60,16 @@ public class OrigamiStepsActivity extends CartonActivity
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager_OrigamiSteps);
+        mTextViewStepPosition = (TextView) findViewById(R.id.textView_stepPosition);
+        mTextViewStepPosition.setText("1");
+        mImageViewStepPosition = (ImageView) findViewById(R.id.imageView_stepPosition);
+
+        mViewPager = (CustomViewPager) findViewById(R.id.viewPager_OrigamiSteps);
         mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+        final float scale = getResources().getDisplayMetrics().density;
+        mViewPager.setPageMargin((int) -(160 * scale + 0.5f));
+        mViewPager.addOnPageChangeListener(this);
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
@@ -100,5 +114,29 @@ public class OrigamiStepsActivity extends CartonActivity
                 onBackPressed();
                 break;
         }
+    }
+
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position < mNbSteps) {
+            mTextViewStepPosition.setText(String.format("%d", position+1));
+            mImageViewStepPosition.setImageDrawable(null);
+        } else {
+            mTextViewStepPosition.setText("");
+            mImageViewStepPosition.setImageResource(R.drawable.ic_action_accept);
+        }
+    }
+
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

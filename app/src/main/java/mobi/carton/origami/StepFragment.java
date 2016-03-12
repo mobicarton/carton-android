@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import mobi.carton.R;
 
@@ -41,20 +40,8 @@ public class StepFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_step, container, false);
 
-        Bundle bundle = getArguments();
-        int position = bundle.getInt(ARG_POSITION);
-        TextView textView = (TextView) rootView.findViewById(R.id.textView_stepPosition);
-
-        if (position == 0) {
-            textView.setVisibility(View.GONE);
-            ImageView imageViewFinished = (ImageView) rootView.findViewById(R.id.imageView_finished);
-            imageViewFinished.setVisibility(View.VISIBLE);
-        } else {
-            textView.setText(String.format("%d", position));
-        }
-
         ImageView imageView = (ImageView) rootView.findViewById(R.id.imageView_step);
-        imageView.setImageResource(bundle.getInt(ARG_IMG_ID));
+        imageView.setImageResource(getArguments().getInt(ARG_IMG_ID));
 
         return rootView;
     }

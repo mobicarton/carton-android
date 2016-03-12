@@ -15,6 +15,29 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"/>
 
+
+    <ImageView
+        android:id="@+id/imageView_stepPosition"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/circle_border"
+        android:padding="6dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"/>
+
+
+    <TextView
+        android:id="@+id/textView_stepPosition"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:textSize="@dimen/font_small"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="32dp"
+        android:gravity="center"/>
+
+
     <View
         android:id="@+id/view_line"
         android:layout_width="match_parent"
