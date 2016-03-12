@@ -2,6 +2,7 @@ package mobi.carton.subtitle;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +11,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import mobi.carton.PageFragment;
 import mobi.carton.R;
 import mobi.carton.csr.ContinuousSpeechRecognition;
 
-public class SubtitleFragment extends PageFragment
+public class SubtitleFragment extends Fragment
         implements
         ContinuousSpeechRecognition.OnTextListener {
 
@@ -47,13 +47,15 @@ public class SubtitleFragment extends PageFragment
 
 
     @Override
-    public void onResumePage() {
+    public void onResume() {
+        super.onResume();
         mContinuousSpeechRecognition.start();
     }
 
 
     @Override
-    public void onPausePage() {
+    public void onPause() {
+        super.onPause();
         mContinuousSpeechRecognition.stop();
     }
 

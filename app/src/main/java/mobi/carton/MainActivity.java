@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,16 +20,12 @@ import mobi.carton.subtitle.SubtitleFragment;
 
 public class MainActivity extends CartonActivity
         implements
-        HeadRecognition.OnHeadGestureListener,
-        ViewPager.OnPageChangeListener {
+        HeadRecognition.OnHeadGestureListener {
 
 
     private HeadRecognition mHeadRecognition;
 
     private CustomViewPager mViewPager;
-    private MenuPagerAdapter mPagerAdapter;
-
-    private int mCurrentPagePosition;
 
 
     @Override
@@ -59,11 +54,10 @@ public class MainActivity extends CartonActivity
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 
-        mPagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
+        MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 
         mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager);
-        mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(this);
+        mViewPager.setAdapter(pagerAdapter);
 
         ViewPagerIndicators viewPagerIndicators = (ViewPagerIndicators) findViewById(R.id.viewPagerIndicators);
         viewPagerIndicators.setViewPager(mViewPager);
@@ -77,8 +71,6 @@ public class MainActivity extends CartonActivity
     protected void onResume() {
         super.onResume();
         mHeadRecognition.start();
-        CustomViewPager.ViewPagerLifecycle currentPage = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(mCurrentPagePosition);
-        currentPage.onResumePage();
     }
 
 
@@ -86,8 +78,6 @@ public class MainActivity extends CartonActivity
     protected void onPause() {
         super.onPause();
         mHeadRecognition.stop();
-        CustomViewPager.ViewPagerLifecycle currentPage = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(mCurrentPagePosition);
-        currentPage.onPausePage();
     }
 
 
@@ -106,28 +96,6 @@ public class MainActivity extends CartonActivity
 
     @Override
     public void onNod(int direction) {
-    }
-
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-
-    @Override
-    public void onPageSelected(int position) {
-        CustomViewPager.ViewPagerLifecycle page;
-        page = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(position);
-        page.onResumePage();
-        page = (CustomViewPager.ViewPagerLifecycle) mPagerAdapter.getItem(mCurrentPagePosition);
-        page.onPausePage();
-        mCurrentPagePosition = position;
-    }
-
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
 
     }
 }

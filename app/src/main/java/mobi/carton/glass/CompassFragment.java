@@ -5,18 +5,18 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
-import mobi.carton.PageFragment;
 import mobi.carton.R;
 import mobi.carton.glass.model.Landmarks;
 import mobi.carton.glass.model.Place;
 
-public class CompassFragment extends PageFragment
+public class CompassFragment extends Fragment
         implements
         OrientationManager.OnChangedListener {
 

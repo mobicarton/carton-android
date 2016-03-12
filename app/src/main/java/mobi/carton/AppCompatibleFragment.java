@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import mobi.carton.library.HeadRecognition;
 
 
-public class AppCompatibleFragment extends PageFragment
+public class AppCompatibleFragment extends Fragment
         implements
         HeadRecognition.OnHeadGestureListener {
 
@@ -69,13 +70,15 @@ public class AppCompatibleFragment extends PageFragment
 
 
     @Override
-    public void onResumePage() {
+    public void onResume() {
+        super.onResume();
         mHeadRecognition.start();
     }
 
 
     @Override
-    public void onPausePage() {
+    public void onPause() {
+        super.onPause();
         mHeadRecognition.stop();
     }
 
@@ -88,8 +91,10 @@ public class AppCompatibleFragment extends PageFragment
 
     @Override
     public void onNod(int direction) {
-        if (direction == HeadRecognition.NOD_DOWN) {
-            startActivity(mIntent);
+        if (getUserVisibleHint()) {
+            if (direction == HeadRecognition.NOD_DOWN) {
+                startActivity(mIntent);
+            }
         }
     }
 }
