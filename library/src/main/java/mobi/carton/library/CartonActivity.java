@@ -73,6 +73,12 @@ public class CartonActivity extends FragmentActivity {
     }
 
 
+    public void setWithoutCarton(boolean withoutCarton) {
+        CartonPrefs.setWithoutCarton(getApplicationContext(), withoutCarton);
+        mDebug = withoutCarton;
+    }
+
+
     public void startDefaultLauncher() {
         if (!mNoLauncher) {
             Intent intent = new Intent(this, LauncherActivity.class);
