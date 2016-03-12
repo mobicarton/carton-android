@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.0.4"
     }
     buildTypes {
         release {
@@ -37,7 +37,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'The Carton SDK for Android enable you to quickly start creating AR apps or adapt your existing application for AR.'
-    libraryVersion = '0.0.3'
+    libraryVersion = '0.0.4'
 
     developerId = 'makowildcat'
     developerName = 'Damien Brun'
