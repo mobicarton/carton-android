@@ -72,7 +72,7 @@ public class OrigamiActivity extends CartonActivity
         origamis.add(new Origami("Cranevar", "Andrew Hudson", 26));
         origamis.add(new Origami("Frog", "Andrew Hudson", 17));
         origamis.add(new Origami("Lily", "Tavin", 25));
-        origamis.add(new Origami("Mouse", "Tavin", 14));
+        origamis.add(new Origami("Mouse", "Tavin", 18));
         origamis.add(new Origami("Tulip", "Andrew Hudson", 23));
 
         return origamis;
