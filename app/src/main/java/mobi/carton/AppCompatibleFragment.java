@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import mobi.carton.library.CartonActivity;
+import mobi.carton.library.CartonPrefs;
 import mobi.carton.library.HeadRecognition;
 
 
@@ -60,6 +62,7 @@ public class AppCompatibleFragment extends Fragment
             textViewName.setText(applicationInfo.loadLabel(packageManager));
             textViewDescription.setText(applicationInfo.loadDescription(packageManager));
             mIntent = packageManager.getLaunchIntentForPackage(applicationInfo.packageName);
+            mIntent.putExtra(CartonActivity.EXTRA_WITHOUT_CARTON, CartonPrefs.getWithoutCarton(getContext()));
         }
 
         mHeadRecognition = new HeadRecognition(getContext());

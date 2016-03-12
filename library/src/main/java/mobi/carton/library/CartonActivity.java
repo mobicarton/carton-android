@@ -15,6 +15,8 @@ import android.view.WindowManager;
 public class CartonActivity extends FragmentActivity {
 
 
+    public static final String EXTRA_WITHOUT_CARTON = "extra_without_carton";
+
     private static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
 
     private boolean mDebug = false;
@@ -58,9 +60,16 @@ public class CartonActivity extends FragmentActivity {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mDebug = CartonPrefs.getWithoutCarton(getApplicationContext());
+        Intent intent = getIntent();
 
-        mNoLauncher = getIntent().getBooleanExtra(EXTRA_NO_LAUNCHER, false);
+        if (intent.hasExtra(EXTRA_WITHOUT_CARTON)) {
+            mDebug = intent.getBooleanExtra(EXTRA_WITHOUT_CARTON, false);
+            CartonPrefs.setWithoutCarton(getApplicationContext(), mDebug);
+            mNoLauncher = true;
+        } else {
+            mNoLauncher = intent.getBooleanExtra(EXTRA_NO_LAUNCHER, false);
+            mDebug = CartonPrefs.getWithoutCarton(getApplicationContext());
+        }
     }
 
 
@@ -117,10 +126,11 @@ public class CartonActivity extends FragmentActivity {
             super.setContentView(view, params);
             return;
         }
-        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
-        frameLayout.addView(view);
-        super.setContentView(frameLayout, params);
+        MirrorRelativeLayout relativeLayout = new MirrorRelativeLayout(this);
+        relativeLayout.addView(view);
+        super.setContentView(relativeLayout, params);
     }
+
 
 
     @Override
@@ -129,8 +139,8 @@ public class CartonActivity extends FragmentActivity {
             super.addContentView(view, params);
             return;
         }
-        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
-        frameLayout.addView(view);
-        super.addContentView(frameLayout, params);
+        MirrorRelativeLayout relativeLayout = new MirrorRelativeLayout(this);
+        relativeLayout.addView(view);
+        super.addContentView(relativeLayout, params);
     }
 }
