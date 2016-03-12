@@ -56,6 +56,8 @@ public class CartonActivity extends FragmentActivity {
 
         window.setAttributes(layoutParams);
 
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         mDebug = CartonPrefs.getWithoutCarton(getApplicationContext());
 
         mNoLauncher = getIntent().getBooleanExtra(EXTRA_NO_LAUNCHER, false);
