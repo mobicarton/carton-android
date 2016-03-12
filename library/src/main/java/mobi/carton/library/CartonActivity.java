@@ -64,11 +64,6 @@ public class CartonActivity extends FragmentActivity {
     }
 
 
-    public void setDebug() {
-        mDebug = true;
-    }
-
-
     public void startDefaultLauncher() {
         if (!mNoLauncher) {
             Intent intent = new Intent(this, LauncherActivity.class);
