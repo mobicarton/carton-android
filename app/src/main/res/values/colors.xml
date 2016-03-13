@@ -4,4 +4,7 @@
     <color name="textPrimary">#FFF</color>
 
     <color name="backgroundDefault">#424242</color>
+
+    <color name="rms_low">#66BB6A</color>
+    <color name="rms_high">#EF5350</color>
 </resources>
