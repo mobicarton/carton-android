@@ -47,16 +47,14 @@ public class SubtitleFragment extends Fragment
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mContinuousSpeechRecognition.start();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mContinuousSpeechRecognition.stop();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            mContinuousSpeechRecognition.start();
+        } else {
+            if (mContinuousSpeechRecognition != null)
+                mContinuousSpeechRecognition.stop();
+        }
     }
 
 
