@@ -11,12 +11,13 @@
 
     <ImageView
         android:id="@+id/imageView_schema"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@+id/textView_advice"
         android:contentDescription="@string/text_launch_advice"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/white"/>
+        android:background="@android:color/transparent"
+        android:src="@drawable/carton_how_to"/>
 
 
     <TextView
@@ -55,6 +56,8 @@
         android:background="@android:color/black"
         android:textColor="@android:color/white"
         android:text="@string/button_try"
+        android:textAllCaps="true"
+        android:padding="12dp"
         android:onClick="clickWithout"/>
 
 </RelativeLayout>
