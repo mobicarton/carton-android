@@ -5,10 +5,22 @@
     android:layout_height="match_parent">
 
 
+    <ProgressBar
+        android:id="@+id/progressbar_rms"
+        android:layout_width="160dp"
+        android:layout_height="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progressbar_subtitle"
+        android:max="100"/>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp"
+        android:layout_below="@+id/progressbar_rms"/>
 
 </RelativeLayout>

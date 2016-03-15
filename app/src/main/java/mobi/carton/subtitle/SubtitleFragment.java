@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -16,11 +17,14 @@ import mobi.carton.csr.ContinuousSpeechRecognition;
 
 public class SubtitleFragment extends Fragment
         implements
-        ContinuousSpeechRecognition.OnTextListener {
+        ContinuousSpeechRecognition.OnTextListener,
+        ContinuousSpeechRecognition.OnRmsListener {
 
 
     private RecyclerView mRecyclerView;
     private SubtitleAdapter mSubtitleAdapter;
+
+    private ProgressBar mProgressBarRms;
 
     private ContinuousSpeechRecognition mContinuousSpeechRecognition;
 
@@ -39,24 +43,25 @@ public class SubtitleFragment extends Fragment
         mSubtitleAdapter = new SubtitleAdapter();
         mRecyclerView.setAdapter(mSubtitleAdapter);
 
+        mProgressBarRms = (ProgressBar) rootView.findViewById(R.id.progressbar_rms);
+
         mContinuousSpeechRecognition = new ContinuousSpeechRecognition(getContext());
         mContinuousSpeechRecognition.setOnTextListener(this);
+        mContinuousSpeechRecognition.setOnRmsListener(this);
 
         return rootView;
     }
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mContinuousSpeechRecognition.start();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mContinuousSpeechRecognition.stop();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            mContinuousSpeechRecognition.start();
+        } else {
+            if (mContinuousSpeechRecognition != null)
+                mContinuousSpeechRecognition.stop();
+        }
     }
 
 
@@ -81,5 +86,11 @@ public class SubtitleFragment extends Fragment
 
     @Override
     public void onError(int error) {
+    }
+
+
+    @Override
+    public void onRmsChanged(float rms) {
+        mProgressBarRms.setProgress((int) (rms * 10));
     }
 }
