@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import java.util.List;
 import mobi.carton.CustomViewPager;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
+import mobi.carton.csr.ContinuousSpeechRecognition;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
@@ -21,7 +23,8 @@ public class OrigamiStepsActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
         ViewPager.OnPageChangeListener,
-        CustomViewPager.OnScrollListener {
+        CustomViewPager.OnScrollListener,
+        ContinuousSpeechRecognition.OnTextListener {
 
 
     public final static String EXTRA_NAME = "extra_name";
@@ -34,6 +37,8 @@ public class OrigamiStepsActivity extends CartonActivity
     private ImageView mImageViewStepPosition;
 
     private HeadRecognition mHeadRecognition;
+
+    private ContinuousSpeechRecognition mContinuousSpeechRecognition;
 
 
     @Override
@@ -75,6 +80,9 @@ public class OrigamiStepsActivity extends CartonActivity
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
+
+        mContinuousSpeechRecognition = new ContinuousSpeechRecognition(this);
+        mContinuousSpeechRecognition.setOnTextListener(this);
     }
 
 
@@ -82,6 +90,7 @@ public class OrigamiStepsActivity extends CartonActivity
     protected void onResume() {
         super.onResume();
         mHeadRecognition.start();
+        mContinuousSpeechRecognition.start();
     }
 
 
@@ -89,6 +98,14 @@ public class OrigamiStepsActivity extends CartonActivity
     protected void onPause() {
         super.onPause();
         mHeadRecognition.stop();
+        mContinuousSpeechRecognition.stop();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mContinuousSpeechRecognition.destroy();
     }
 
 
@@ -150,5 +167,33 @@ public class OrigamiStepsActivity extends CartonActivity
                 onBackPressed();
                 break;
         }
+    }
+
+
+    @Override
+    public void onTextMatched(ArrayList<String> matchedText) {
+        Log.d("onTextMatched", matchedText.toString());
+        for (String s : matchedText) {
+            switch (s) {
+                case "next":
+                    onTilt(HeadRecognition.TILT_RIGHT);
+                    return;
+                case "previous":
+                    onTilt(HeadRecognition.TILT_LEFT);
+                    return;
+                case "cancel":
+                    actionDirection(HeadRecognition.NOD_UP);
+                    return;
+                case "ok":
+                    actionDirection(HeadRecognition.NOD_UP);
+                    return;
+            }
+        }
+    }
+
+
+    @Override
+    public void onError(int error) {
+
     }
 }
