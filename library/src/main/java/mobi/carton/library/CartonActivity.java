@@ -17,7 +17,7 @@ public class CartonActivity extends FragmentActivity {
 
     public static final String EXTRA_WITHOUT_CARTON = "extra_without_carton";
 
-    private static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
+    public static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
 
     private boolean mDebug = false;
 

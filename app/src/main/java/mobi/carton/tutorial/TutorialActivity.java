@@ -51,6 +51,8 @@ public class TutorialActivity extends CartonActivity implements
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
+
+        Utils.setTutorialDone(this, true);
     }
 
 

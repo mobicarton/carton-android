@@ -17,7 +17,9 @@ import mobi.carton.library.CartonSdk;
 import mobi.carton.library.HeadRecognition;
 import mobi.carton.origami.OrigamiMenuFragment;
 import mobi.carton.subtitle.SubtitleFragment;
+import mobi.carton.tutorial.TutorialActivity;
 import mobi.carton.tutorial.TutorialMenuFragment;
+import mobi.carton.tutorial.Utils;
 
 public class MainActivity extends CartonActivity
         implements
@@ -70,6 +72,13 @@ public class MainActivity extends CartonActivity
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
+
+        if (getIntent().getBooleanExtra(EXTRA_NO_LAUNCHER, false)) {
+            if (!Utils.isTutorialDone(this)) {
+                Intent intentTutorial = new Intent(this, TutorialActivity.class);
+                startActivity(intentTutorial);
+            }
+        }
     }
 
 
