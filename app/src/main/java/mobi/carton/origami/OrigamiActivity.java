@@ -16,7 +16,9 @@ import mobi.carton.library.HeadRecognition;
 
 
 public class OrigamiActivity extends CartonActivity
-        implements HeadRecognition.OnHeadGestureListener {
+        implements
+        HeadRecognition.OnHeadGestureListener,
+        CustomViewPager.OnScrollListener {
 
 
     private ArrayList<Origami> mOrigamis;
@@ -46,6 +48,8 @@ public class OrigamiActivity extends CartonActivity
         mViewPager.setOffscreenPageLimit(3);
         final float scale = getResources().getDisplayMetrics().density;
         mViewPager.setPageMargin((int) -(40 * scale + 0.5f));
+
+        mViewPager.setOnScrollListener(this);
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
@@ -94,6 +98,17 @@ public class OrigamiActivity extends CartonActivity
 
     @Override
     public void onNod(int direction) {
+        action(direction);
+    }
+
+
+    @Override
+    public void onScroll(int direction) {
+        action(direction);
+    }
+
+
+    private void action(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_DOWN:
                 Origami origami = mOrigamis.get(mViewPager.getCurrentItem());
