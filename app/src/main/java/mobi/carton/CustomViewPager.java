@@ -8,6 +8,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import mobi.carton.library.HeadRecognition;
+
 public class CustomViewPager extends ViewPager
         implements
         View.OnTouchListener,
@@ -62,22 +64,22 @@ public class CustomViewPager extends ViewPager
 
         // Right
         if (45 >= angle && angle > -45) {
-            direction = -2;
+            direction = 1;
         } else
 
-            // Down
+            // Down (back == up with head)
             if (-45 >= angle && angle > -135) {
-                direction = -1;
+                direction = HeadRecognition.NOD_UP;
             } else
 
                 // Left
                 if (-135 >= angle && angle >= -180 || 180 >= angle && angle > 135) {
-                    direction = 2;
+                    direction = 0;
                 } else
 
-                    // Up
+                    // Up (go == down with head)
                     if (135 >= angle && angle > 45) {
-                        direction = 1;
+                        direction = HeadRecognition.NOD_DOWN;
                     }
 
         return direction;
