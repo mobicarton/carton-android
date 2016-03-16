@@ -4,7 +4,6 @@ package mobi.carton;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,14 +14,14 @@ public class CustomViewPager extends ViewPager
         GestureDetector.OnGestureListener {
 
 
-    public interface ViewPagerLifecycle {
-
-        void onResumePage();
-        void onPausePage();
+    public interface OnScrollListener {
+        void onScroll(int direction);
     }
 
 
     private GestureDetector mDetector;
+
+    private OnScrollListener mOnScrollListener;
 
 
     public CustomViewPager(Context context) {
@@ -48,6 +47,11 @@ public class CustomViewPager extends ViewPager
         if (getCurrentItem() > 0) {
             setCurrentItem(getCurrentItem() - 1);
         }
+    }
+
+
+    public void setOnScrollListener(OnScrollListener l) {
+        mOnScrollListener = l;
     }
 
 
@@ -122,8 +126,9 @@ public class CustomViewPager extends ViewPager
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        int direction = getDirection(e1.getX(), e1.getY(), e2.getX(), e2.getY());
-        Log.d("DIRECTION", "onFling > " + direction);
+        if (mOnScrollListener != null) {
+            mOnScrollListener.onScroll(getDirection(e1.getX(), e1.getY(), e2.getX(), e2.getY()));
+        }
         return false;
     }
 }
