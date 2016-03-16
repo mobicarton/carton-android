@@ -20,12 +20,15 @@ import mobi.carton.subtitle.SubtitleFragment;
 
 public class MainActivity extends CartonActivity
         implements
-        HeadRecognition.OnHeadGestureListener {
+        HeadRecognition.OnHeadGestureListener,
+        CustomViewPager.OnScrollListener {
 
 
     private HeadRecognition mHeadRecognition;
 
     private CustomViewPager mViewPager;
+
+    private MenuPagerAdapter mMenuPagerAdapter;
 
 
     @Override
@@ -54,10 +57,11 @@ public class MainActivity extends CartonActivity
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
 
-        MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
+        mMenuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 
         mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager);
-        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setAdapter(mMenuPagerAdapter);
+        mViewPager.setOnScrollListener(this);
 
         ViewPagerIndicators viewPagerIndicators = (ViewPagerIndicators) findViewById(R.id.viewPagerIndicators);
         viewPagerIndicators.setViewPager(mViewPager);
@@ -97,5 +101,12 @@ public class MainActivity extends CartonActivity
     @Override
     public void onNod(int direction) {
 
+    }
+
+
+    @Override
+    public void onScroll(int direction) {
+        CartonFragment cartonFragment = (CartonFragment) mMenuPagerAdapter.getItem(mViewPager.getCurrentItem());
+        cartonFragment.movingDirection(direction);
     }
 }

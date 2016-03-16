@@ -3,16 +3,16 @@ package mobi.carton.origami;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import mobi.carton.CartonFragment;
 import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
 
 
-public class OrigamiMenuFragment extends Fragment
+public class OrigamiMenuFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {
 
@@ -54,9 +54,20 @@ public class OrigamiMenuFragment extends Fragment
     @Override
     public void onNod(int direction) {
         if (getUserVisibleHint()) {
-            if (direction == HeadRecognition.NOD_DOWN) {
-                startActivity(new Intent(getContext(), OrigamiActivity.class));
-            }
+            actionDirection(direction);
+        }
+    }
+
+
+    @Override
+    public void movingDirection(int direction) {
+        actionDirection(direction);
+    }
+
+
+    private void actionDirection(int direction) {
+        if (direction == HeadRecognition.NOD_DOWN) {
+            startActivity(new Intent(getContext(), OrigamiActivity.class));
         }
     }
 }

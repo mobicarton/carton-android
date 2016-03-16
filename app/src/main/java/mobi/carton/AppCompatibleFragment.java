@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import mobi.carton.library.CartonPrefs;
 import mobi.carton.library.HeadRecognition;
 
 
-public class AppCompatibleFragment extends Fragment
+public class AppCompatibleFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {
 
@@ -95,9 +94,20 @@ public class AppCompatibleFragment extends Fragment
     @Override
     public void onNod(int direction) {
         if (getUserVisibleHint()) {
-            if (direction == HeadRecognition.NOD_DOWN) {
-                startActivity(mIntent);
-            }
+            actionDirection(direction);
+        }
+    }
+
+
+    @Override
+    public void movingDirection(int direction) {
+        actionDirection(direction);
+    }
+
+
+    private void actionDirection(int direction) {
+        if (direction == HeadRecognition.NOD_DOWN) {
+            startActivity(mIntent);
         }
     }
 }

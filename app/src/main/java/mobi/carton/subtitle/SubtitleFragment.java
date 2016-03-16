@@ -2,7 +2,6 @@ package mobi.carton.subtitle;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,10 +11,11 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
+import mobi.carton.CartonFragment;
 import mobi.carton.R;
 import mobi.carton.csr.ContinuousSpeechRecognition;
 
-public class SubtitleFragment extends Fragment
+public class SubtitleFragment extends CartonFragment
         implements
         ContinuousSpeechRecognition.OnTextListener,
         ContinuousSpeechRecognition.OnRmsListener {
