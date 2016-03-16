@@ -20,7 +20,8 @@ import mobi.carton.library.HeadRecognition;
 public class OrigamiStepsActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
-        ViewPager.OnPageChangeListener {
+        ViewPager.OnPageChangeListener,
+        CustomViewPager.OnScrollListener {
 
 
     public final static String EXTRA_NAME = "extra_name";
@@ -70,6 +71,7 @@ public class OrigamiStepsActivity extends CartonActivity
         final float scale = getResources().getDisplayMetrics().density;
         mViewPager.setPageMargin((int) -(160 * scale + 0.5f));
         mViewPager.addOnPageChangeListener(this);
+        mViewPager.setOnScrollListener(this);
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
@@ -105,15 +107,7 @@ public class OrigamiStepsActivity extends CartonActivity
 
     @Override
     public void onNod(int direction) {
-        switch (direction) {
-            case HeadRecognition.NOD_DOWN:
-                if (mViewPager.getCurrentItem() == mNbSteps)
-                    onBackPressed();
-                break;
-            case HeadRecognition.NOD_UP:
-                onBackPressed();
-                break;
-        }
+        actionDirection(direction);
     }
 
 
@@ -138,5 +132,23 @@ public class OrigamiStepsActivity extends CartonActivity
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+
+    @Override
+    public void onScroll(int direction) {
+        actionDirection(direction);
+    }
+
+    private void actionDirection(int direction) {
+        switch (direction) {
+            case HeadRecognition.NOD_DOWN:
+                if (mViewPager.getCurrentItem() == mNbSteps)
+                    onBackPressed();
+                break;
+            case HeadRecognition.NOD_UP:
+                onBackPressed();
+                break;
+        }
     }
 }
