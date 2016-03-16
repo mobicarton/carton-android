@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import mobi.carton.CartonFragment;
 import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
-import mobi.carton.origami.OrigamiActivity;
 
 public class TutorialMenuFragment extends CartonFragment
         implements
@@ -67,7 +66,7 @@ public class TutorialMenuFragment extends CartonFragment
 
     private void actionDirection(int direction) {
         if (direction == HeadRecognition.NOD_DOWN) {
-            startActivity(new Intent(getContext(), OrigamiActivity.class));
+            startActivity(new Intent(getContext(), TutorialActivity.class));
         }
     }
 }
