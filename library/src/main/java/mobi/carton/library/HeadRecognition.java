@@ -34,13 +34,13 @@ public class HeadRecognition
     public static final int TILT_LEFT = 1;
 
     private static final int TILT_TIME = 1000; // millisecond
-    private static final int TILT_THRESHOLD = 25;
+    private static final int TILT_THRESHOLD = 15;
 
     public static final int NOD_UP = 2;
     public static final int NOD_DOWN = 3;
 
     private static final int NOD_TIME = 1000;
-    private static final int NOD_THRESHOLD = 25;
+    private static final int NOD_THRESHOLD = 15;
 
 
     private SensorManager mSensorManager;
