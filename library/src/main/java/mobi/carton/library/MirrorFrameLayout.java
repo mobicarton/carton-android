@@ -4,22 +4,22 @@ package mobi.carton.library;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 
-public class MirrorRelativeLayout extends RelativeLayout {
+public class MirrorFrameLayout extends FrameLayout {
 
 
-    public MirrorRelativeLayout(Context context) {
+    public MirrorFrameLayout(Context context) {
         this(context, null, 0);
     }
 
 
-    public MirrorRelativeLayout(Context context, AttributeSet attrs) {
+    public MirrorFrameLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
 
-    public MirrorRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MirrorFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setWillNotDraw(false);
     }

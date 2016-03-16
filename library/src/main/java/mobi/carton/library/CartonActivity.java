@@ -132,9 +132,9 @@ public class CartonActivity extends FragmentActivity {
             super.setContentView(view, params);
             return;
         }
-        MirrorRelativeLayout relativeLayout = new MirrorRelativeLayout(this);
-        relativeLayout.addView(view);
-        super.setContentView(relativeLayout, params);
+        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
+        frameLayout.addView(view);
+        super.setContentView(frameLayout, params);
     }
 
 
@@ -145,8 +145,8 @@ public class CartonActivity extends FragmentActivity {
             super.addContentView(view, params);
             return;
         }
-        MirrorRelativeLayout relativeLayout = new MirrorRelativeLayout(this);
-        relativeLayout.addView(view);
-        super.addContentView(relativeLayout, params);
+        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
+        frameLayout.addView(view);
+        super.addContentView(frameLayout, params);
     }
 }
