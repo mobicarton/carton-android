@@ -17,6 +17,7 @@ import mobi.carton.library.CartonSdk;
 import mobi.carton.library.HeadRecognition;
 import mobi.carton.origami.OrigamiMenuFragment;
 import mobi.carton.subtitle.SubtitleFragment;
+import mobi.carton.tutorial.TutorialMenuFragment;
 
 public class MainActivity extends CartonActivity
         implements
@@ -56,6 +57,7 @@ public class MainActivity extends CartonActivity
         }
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, TutorialMenuFragment.class.getName()));
 
         mMenuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 
