@@ -1,9 +1,8 @@
 package mobi.carton.tutorial;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +11,14 @@ import mobi.carton.CustomViewPager;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
+import mobi.carton.csr.ContinuousSpeechRecognition;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
-public class TutorialActivity extends CartonActivity implements
+
+public class TutorialSpeechRecognitionActivity extends CartonActivity implements
         HeadRecognition.OnHeadGestureListener,
+        ContinuousSpeechRecognition.OnTextListener,
         CustomViewPager.OnScrollListener {
 
 
@@ -24,19 +26,20 @@ public class TutorialActivity extends CartonActivity implements
 
     private HeadRecognition mHeadRecognition;
 
+    private ContinuousSpeechRecognition mContinuousSpeechRecognition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tutorial);
+        setContentView(R.layout.activity_tutorial_sr);
 
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(TutorialFragment.newInstance("A simple tutorial to explain how interact. Make a quick tilt with your head on the right to navigate", 0));
-        fragments.add(TutorialFragment.newInstance("You can tilt on the other side too. Actually you can even nod your head down to navigate forward. You can also continue to the right :)", 0));
-        fragments.add(TutorialFragment.newInstance("Almost done. In fact, you can touch the screen with your finger easily, and swipe left, right, forward or backward, just try.", 0));
-        fragments.add(TutorialFragment.newInstance("Finish! Nothing to do here. You can go to the menu with head or finger interactions you've just learned. Congrats!", 0));
+        fragments.add(TutorialFragment.newInstance("If you see this icon, it's mean that there is currently another way to interact based on speech to recognition, just say \"next\" or \"previous\" to navigate.", 0));
+        fragments.add(TutorialFragment.newInstance("If you want to go forward, you can say \"Ok\", but there is no more forward action in this tutorial, you can continue to the right.", 0));
+        fragments.add(TutorialFragment.newInstance("If you want to go back just say \"cancel\"! Or you can do it with your fingers with backward movement or with nodding up your head.", 0));
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
@@ -51,6 +54,9 @@ public class TutorialActivity extends CartonActivity implements
 
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
+
+        mContinuousSpeechRecognition = new ContinuousSpeechRecognition(this);
+        mContinuousSpeechRecognition.setOnTextListener(this);
     }
 
 
@@ -58,6 +64,7 @@ public class TutorialActivity extends CartonActivity implements
     protected void onResume() {
         super.onResume();
         mHeadRecognition.start();
+        mContinuousSpeechRecognition.start();
     }
 
 
@@ -65,6 +72,14 @@ public class TutorialActivity extends CartonActivity implements
     protected void onPause() {
         super.onPause();
         mHeadRecognition.stop();
+        mContinuousSpeechRecognition.stop();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mContinuousSpeechRecognition.destroy();
     }
 
 
@@ -95,13 +110,34 @@ public class TutorialActivity extends CartonActivity implements
 
     private void actionDirection(int direction) {
         switch (direction) {
-            case HeadRecognition.NOD_DOWN:
-                Intent intent = new Intent(this, TutorialSpeechRecognitionActivity.class);
-                startActivity(intent);
-                break;
             case HeadRecognition.NOD_UP:
                 onBackPressed();
                 break;
         }
+    }
+
+
+    @Override
+    public void onTextMatched(ArrayList<String> matchedText) {
+        Log.d("onTextMatched", matchedText.toString());
+        for (String s : matchedText) {
+            switch (s) {
+                case "next":
+                    onTilt(HeadRecognition.TILT_RIGHT);
+                    return;
+                case "previous":
+                    onTilt(HeadRecognition.TILT_LEFT);
+                    return;
+                case "cancel":
+                    actionDirection(HeadRecognition.NOD_UP);
+                    return;
+            }
+        }
+    }
+
+
+    @Override
+    public void onError(int error) {
+
     }
 }
