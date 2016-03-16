@@ -16,7 +16,8 @@
         android:layout_height="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="4dp"
-        android:src="@drawable/ic_action_mic"/>
+        android:src="@drawable/ic_action_mic"
+        android:contentDescription="@string/contentDescription_sr"/>
 
 
 </RelativeLayout>

@@ -55,4 +55,6 @@
 
     <string name="tutorial">Tutorial</string>
 
+    <string name="contentDescription_sr">Speech Recognition</string>
+
 </resources>

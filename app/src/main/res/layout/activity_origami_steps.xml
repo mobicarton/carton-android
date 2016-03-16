@@ -17,6 +17,14 @@
 
 
     <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_action_mic"
+        android:contentDescription="@string/contentDescription_sr"/>
+
+    <ImageView
         android:id="@+id/imageView_stepPosition"
         android:layout_width="32dp"
         android:layout_height="32dp"

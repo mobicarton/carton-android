@@ -185,7 +185,7 @@ public class OrigamiStepsActivity extends CartonActivity
                     actionDirection(HeadRecognition.NOD_UP);
                     return;
                 case "ok":
-                    actionDirection(HeadRecognition.NOD_UP);
+                    actionDirection(HeadRecognition.NOD_DOWN);
                     return;
             }
         }
