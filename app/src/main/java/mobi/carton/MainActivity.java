@@ -44,6 +44,7 @@ public class MainActivity extends CartonActivity
 
         List<Fragment> fragments = new ArrayList<>();
 
+        fragments.add(Fragment.instantiate(this, TutorialMenuFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, TimeFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, OrigamiMenuFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
@@ -59,7 +60,6 @@ public class MainActivity extends CartonActivity
         }
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, TutorialMenuFragment.class.getName()));
 
         mMenuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 

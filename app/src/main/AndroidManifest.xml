@@ -50,7 +50,7 @@
         </activity>
 
         <activity
-            android:name=".tutorial.TutorialSpeechRecognitionActivity"
+            android:name=".tutorial.TutorialSpeechActivity"
             android:screenOrientation="landscape">
         </activity>
     </application>

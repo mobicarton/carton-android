@@ -96,7 +96,7 @@ public class TutorialHeadActivity extends CartonActivity implements
     private void actionDirection(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_DOWN:
-                Intent intent = new Intent(this, TutorialSpeechRecognitionActivity.class);
+                Intent intent = new Intent(this, TutorialSpeechActivity.class);
                 startActivity(intent);
                 break;
             case HeadRecognition.NOD_UP:

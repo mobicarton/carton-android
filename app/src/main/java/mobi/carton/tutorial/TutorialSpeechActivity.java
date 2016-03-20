@@ -16,7 +16,7 @@ import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
 
-public class TutorialSpeechRecognitionActivity extends CartonActivity implements
+public class TutorialSpeechActivity extends CartonActivity implements
         HeadRecognition.OnHeadGestureListener,
         ContinuousSpeechRecognition.OnTextListener,
         CustomViewPager.OnScrollListener {
@@ -37,9 +37,8 @@ public class TutorialSpeechRecognitionActivity extends CartonActivity implements
 
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(TutorialFragment.newInstance("If you see this icon, it's mean that there is currently another way to interact based on speech to recognition, just say \"next\" or \"previous\" to navigate.", 0));
-        fragments.add(TutorialFragment.newInstance("If you want to go forward, you can say \"Ok\", but there is no more forward action in this tutorial, you can continue to the right.", 0));
-        fragments.add(TutorialFragment.newInstance("If you want to go back just say \"cancel\"! Or you can do it with your fingers with backward movement or with nodding up your head.", 0));
+        fragments.add(TutorialFragment.newInstance(getString(R.string.tutorial_step_5), 0));
+        fragments.add(TutorialFragment.newInstance(getString(R.string.tutorial_step_6), 0));
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
