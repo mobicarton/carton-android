@@ -9,4 +9,14 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="NeedleView">
+
+        <attr name="orientationVertical" format="boolean"/>
+        <attr name="needleWidth" format="dimension"/>
+        <attr name="needleColor" format="color"/>
+        <attr name="angle" format="integer"/>
+
+    </declare-styleable>
+
 </resources>
