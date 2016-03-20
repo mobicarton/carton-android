@@ -97,6 +97,7 @@ public class NeedleView extends View {
 
         mPosX = mCenterX + (int) ((double) mRadius * Math.cos(radian));
         mPosY = mCenterY + (int) ((double) mRadius * Math.sin(radian));
+        invalidate();
     }
 
 
