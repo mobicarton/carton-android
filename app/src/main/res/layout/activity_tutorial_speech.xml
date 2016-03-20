@@ -12,12 +12,24 @@
         android:layout_height="match_parent"/>
 
     <ImageView
+        android:id="@+id/imageVIew_iconSpeech"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/ic_action_mic"
         android:contentDescription="@string/contentDescription_sr"/>
+
+    <ProgressBar
+        android:id="@+id/progressbar_rms"
+        android:layout_width="80dp"
+        android:layout_height="2dp"
+        android:layout_toRightOf="@+id/imageVIew_iconSpeech"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="11dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progressbar_subtitle"
+        android:max="100"/>
 
 
 </RelativeLayout>

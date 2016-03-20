@@ -1,13 +1,16 @@
 package mobi.carton.tutorial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mobi.carton.CustomViewPager;
+import mobi.carton.MainActivity;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
@@ -19,13 +22,15 @@ import mobi.carton.library.HeadRecognition;
 public class TutorialSpeechActivity extends CartonActivity implements
         HeadRecognition.OnHeadGestureListener,
         ContinuousSpeechRecognition.OnTextListener,
-        CustomViewPager.OnScrollListener {
+        CustomViewPager.OnScrollListener,
+        ContinuousSpeechRecognition.OnRmsListener {
 
 
     private CustomViewPager mViewPager;
 
     private HeadRecognition mHeadRecognition;
 
+    private ProgressBar mProgressBarRms;
     private ContinuousSpeechRecognition mContinuousSpeechRecognition;
 
 
@@ -33,7 +38,7 @@ public class TutorialSpeechActivity extends CartonActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_tutorial_sr);
+        setContentView(R.layout.activity_tutorial_speech);
 
         List<Fragment> fragments = new ArrayList<>();
 
@@ -54,8 +59,11 @@ public class TutorialSpeechActivity extends CartonActivity implements
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
 
+        mProgressBarRms = (ProgressBar) findViewById(R.id.progressbar_rms);
+
         mContinuousSpeechRecognition = new ContinuousSpeechRecognition(this);
         mContinuousSpeechRecognition.setOnTextListener(this);
+        mContinuousSpeechRecognition.setOnRmsListener(this);
     }
 
 
@@ -112,6 +120,12 @@ public class TutorialSpeechActivity extends CartonActivity implements
             case HeadRecognition.NOD_UP:
                 onBackPressed();
                 break;
+            case HeadRecognition.NOD_DOWN:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra(CartonActivity.EXTRA_NO_LAUNCHER, true);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -130,6 +144,9 @@ public class TutorialSpeechActivity extends CartonActivity implements
                 case "cancel":
                     actionDirection(HeadRecognition.NOD_UP);
                     return;
+                case "ok":
+                    actionDirection(HeadRecognition.NOD_DOWN);
+                    return;
             }
         }
     }
@@ -138,5 +155,11 @@ public class TutorialSpeechActivity extends CartonActivity implements
     @Override
     public void onError(int error) {
 
+    }
+
+
+    @Override
+    public void onRmsChanged(float rms) {
+        mProgressBarRms.setProgress((int) (rms * 10));
     }
 }
