@@ -54,6 +54,7 @@
     -->
 
     <string name="tutorial">Tutorial</string>
+    <string name="tutorial_description">Learn how to interact with Carton</string>
 
     <string name="contentDescription_sr">Speech Recognition</string>
 

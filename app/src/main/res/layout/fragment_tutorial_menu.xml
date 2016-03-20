@@ -7,11 +7,21 @@
 
 
     <TextView
+        android:id="@+id/textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:textSize="@dimen/font_extra_large"
         android:layout_centerInParent="true"
         android:text="@string/tutorial"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_title"
+        android:textSize="@dimen/font_normal"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tutorial_description"/>
 
 </RelativeLayout>
