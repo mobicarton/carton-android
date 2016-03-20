@@ -8,6 +8,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import mobi.carton.library.CartonPrefs;
 import mobi.carton.library.HeadRecognition;
 
 public class CustomViewPager extends ViewPager
@@ -92,6 +93,9 @@ public class CustomViewPager extends ViewPager
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if (!CartonPrefs.getWithoutCarton(getContext())) {
+            event.setLocation(event.getX()*-1, event.getY());
+        }
         return mDetector.onTouchEvent(event);
     }
 
