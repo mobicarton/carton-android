@@ -50,7 +50,7 @@ public class TutorialActivity extends CartonActivity
     public void onScroll(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_DOWN:
-                Intent intent = new Intent(this, TutorialSpeechRecognitionActivity.class);
+                Intent intent = new Intent(this, TutorialHeadActivity.class);
                 startActivity(intent);
                 break;
             case HeadRecognition.NOD_UP:

@@ -1,0 +1,51 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@drawable/border"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textView_tracking"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"/>
+
+
+        <mobi.carton.tutorial.NeedleView
+            android:id="@+id/needleView"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/textView_tracking"
+            app:needleColor="@android:color/holo_orange_light"
+            app:needleWidth="1dp"
+            app:orientationVertical="true"/>
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="1dp"
+            android:layout_toRightOf="@id/textView_tracking"
+            android:layout_centerVertical="true"
+            android:background="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/textView_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/needleView"
+            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_normal"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

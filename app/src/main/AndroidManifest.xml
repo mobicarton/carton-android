@@ -45,6 +45,11 @@
         </activity>
 
         <activity
+            android:name=".tutorial.TutorialHeadActivity"
+            android:screenOrientation="landscape">
+        </activity>
+
+        <activity
             android:name=".tutorial.TutorialSpeechRecognitionActivity"
             android:screenOrientation="landscape">
         </activity>
