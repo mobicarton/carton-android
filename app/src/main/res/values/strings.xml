@@ -57,4 +57,11 @@
 
     <string name="contentDescription_sr">Speech Recognition</string>
 
+    <string name="tutorial_step_1">Try to reach the screen of your phone with your finger and swipe Left/Right to navigate.</string>
+    <string name="tutorial_step_2">Well, you can also swipe forward with your finger to go further or backward to return.</string>
+    <string name="tutorial_step_3">Another convenience way to navigate, is to make a quick tilt Left/Right with your head.</string>
+    <string name="tutorial_step_4">You can also go forward or backward by making a quick nod Down (go further) or Up (return) with your head.</string>
+    <string name="tutorial_step_5">This icon means you can navigate just by saying \"Next/Previous". The others gestures are still available.</string>
+    <string name="tutorial_step_6">In the same way you can go further or return with \"OK/Cancel". From here going further will finish the tutorial! Congrats :)</string>
+
 </resources>
