@@ -23,6 +23,9 @@ public class CartonActivity extends FragmentActivity {
 
     private boolean mNoLauncher;
 
+    private TouchView mTouchView;
+    private boolean mTouchAdded;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,9 @@ public class CartonActivity extends FragmentActivity {
             mNoLauncher = intent.getBooleanExtra(EXTRA_NO_LAUNCHER, false);
             mDebug = CartonPrefs.getWithoutCarton(getApplicationContext());
         }
+
+        mTouchView = new TouchView(this);
+        mTouchAdded = false;
     }
 
 
@@ -119,8 +125,8 @@ public class CartonActivity extends FragmentActivity {
         this.setContentView(
                 view,
                 new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
                 )
         );
     }
@@ -130,13 +136,14 @@ public class CartonActivity extends FragmentActivity {
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         if (mDebug) {
             super.setContentView(view, params);
-            return;
+        } else {
+            MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
+            frameLayout.addView(view);
+            super.setContentView(frameLayout, params);
         }
-        MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
-        frameLayout.addView(view);
-        super.setContentView(frameLayout, params);
-    }
 
+        addTouchView();
+    }
 
 
     @Override
@@ -148,5 +155,17 @@ public class CartonActivity extends FragmentActivity {
         MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
         frameLayout.addView(view);
         super.addContentView(frameLayout, params);
+    }
+
+
+    public void addTouchView() {
+        if (!mTouchAdded) {
+            mTouchAdded = true;
+            super.addContentView(mTouchView,
+                    new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                    ));
+        }
     }
 }
