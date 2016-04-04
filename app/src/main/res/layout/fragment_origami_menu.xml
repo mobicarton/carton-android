@@ -28,9 +28,9 @@
 
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/origami_logo"/>
+        android:src="@drawable/cranevar_finished"/>
 
 </RelativeLayout>
