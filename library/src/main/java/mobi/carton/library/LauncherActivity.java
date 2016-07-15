@@ -7,13 +7,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * A default launcher to provide information: how to put mobile phone into a CARTON
+ * device, a link to the official website and auto-launch when the phone is horizontal
+ */
 public class LauncherActivity extends Activity
         implements
         HeadRecognition.OnHeadTrackingListener {
 
 
+    /**
+     * Code to check where the result come from
+     */
     public static final int CODE_LAUNCHER = 32767;
 
+    /**
+     * return true if the app is launch without the CARTON device
+     */
     public static final String EXTRA_WITHOUT = "extra_without";
 
 
@@ -45,6 +55,10 @@ public class LauncherActivity extends Activity
     }
 
 
+    /**
+     * When user click on the link to the official website
+     * Then launch implicit intent
+     */
     public void clickVisit(View v) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
@@ -54,6 +68,10 @@ public class LauncherActivity extends Activity
     }
 
 
+    /**
+     * When user click on the button to launch app without using CARTON device
+     * Then set extra to return app without using any CARTON device and remove the launcher
+     */
     public void clickWithout(View v) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_WITHOUT, true);
@@ -62,8 +80,12 @@ public class LauncherActivity extends Activity
     }
 
 
+    /**
+     * Check: if the phone is horizontal then consider CARTON is used and remove the launcher
+     */
     @Override
     public void onDirectionChanged(int azimuth, int pitch, int roll) {
+        // if roll and pitch are 0 (+/- 10°)
         if ((pitch < 10 && pitch > -10) && (roll < 10 && roll > - 10)){
             Intent intent = new Intent();
             intent.putExtra(EXTRA_WITHOUT, false);
