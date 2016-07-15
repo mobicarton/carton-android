@@ -16,6 +16,10 @@ import mobi.carton.R;
 import mobi.carton.glass.model.Landmarks;
 import mobi.carton.glass.model.Place;
 
+
+/**
+ * A Fragment to show the Compass ("imported" from Google Glass) feature in the main menu
+ */
 public class CompassFragment extends CartonFragment
         implements
         OrientationManager.OnChangedListener {

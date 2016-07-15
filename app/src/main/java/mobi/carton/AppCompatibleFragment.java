@@ -16,6 +16,9 @@ import mobi.carton.library.CartonPrefs;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * Base fragment to present any compatible app with CARTON device installed on the mobile
+ */
 public class AppCompatibleFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {

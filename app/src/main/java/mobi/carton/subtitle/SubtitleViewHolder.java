@@ -7,6 +7,10 @@ import android.widget.TextView;
 
 import mobi.carton.R;
 
+
+/**
+ * A ViewHolder for a simple text (which represent subtitle)
+ */
 public class SubtitleViewHolder extends RecyclerView.ViewHolder {
 
 

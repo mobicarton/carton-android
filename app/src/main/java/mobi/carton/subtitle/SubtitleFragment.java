@@ -15,6 +15,10 @@ import mobi.carton.CartonFragment;
 import mobi.carton.R;
 import mobi.carton.csr.ContinuousSpeechRecognition;
 
+
+/**
+ * A Fragment to show the Live Subtitle feature
+ */
 public class SubtitleFragment extends CartonFragment
         implements
         ContinuousSpeechRecognition.OnTextListener,
@@ -89,6 +93,10 @@ public class SubtitleFragment extends CartonFragment
     }
 
 
+    /**
+     * Usually rms vary between 0 and 10 (that why we multiply by 10)
+     * @param rms RMS dB value which represent sound level
+     */
     @Override
     public void onRmsChanged(float rms) {
         mProgressBarRms.setProgress((int) (rms * 10));

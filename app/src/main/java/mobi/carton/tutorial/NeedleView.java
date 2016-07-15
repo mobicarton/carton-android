@@ -11,6 +11,10 @@ import android.view.View;
 import mobi.carton.R;
 
 
+/**
+ * A view which provide a vertical or horizontal needle
+ * The needle can rotate to an half circle
+ */
 public class NeedleView extends View {
 
 
@@ -28,12 +32,20 @@ public class NeedleView extends View {
 
 
     public NeedleView(Context context) {
-        super(context);
+        this(context, null);
     }
 
 
     public NeedleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+
+    /**
+     * Constructor
+     */
+    public NeedleView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.NeedleView, 0, 0);
 
@@ -54,11 +66,6 @@ public class NeedleView extends View {
         mPaint.setColor(color);
 
         setAngle(mAngle);
-    }
-
-
-    public NeedleView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
     }
 
 
@@ -86,6 +93,13 @@ public class NeedleView extends View {
     }
 
 
+    /**
+     * Set the rotation of the needle by defining an angle
+     * Value should be between 0 and 180°
+     * For the horizontal style, 0° point to right and 180° to left
+     * For the vertical style, 0° point to down and 180° to up
+     * @param angle the angle of the needle to rotate
+     */
     public void setAngle(int angle) {
         mAngle = angle;
 
@@ -101,11 +115,19 @@ public class NeedleView extends View {
     }
 
 
+    /**
+     * Set the color of the needle.
+     * @param color the color of the needle
+     */
     public void setNeedleColor(int color) {
         mPaint.setColor(color);
     }
 
 
+    /**
+     * Set the width of the needle.
+     * @param width the width of the needle
+     */
     public void setNeedleWidth(float width) {
         mPaint.setStrokeWidth(width);
     }

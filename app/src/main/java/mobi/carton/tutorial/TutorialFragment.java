@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import mobi.carton.R;
 
+
+/**
+ * Simple Fragment with some text to explain what to do in the tutorial
+ */
 public class TutorialFragment extends Fragment {
 
 

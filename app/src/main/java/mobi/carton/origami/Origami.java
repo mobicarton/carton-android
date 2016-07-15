@@ -1,6 +1,9 @@
 package mobi.carton.origami;
 
 
+/**
+ * Model Origami use to populate/create adapter for a list of origami
+ */
 public class Origami {
 
 

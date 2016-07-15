@@ -19,6 +19,9 @@ import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * Activity to handle each step of the origami
+ */
 public class OrigamiStepsActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
@@ -59,10 +62,10 @@ public class OrigamiStepsActivity extends CartonActivity
         int resourceId;
         for (int i = 1; i <= mNbSteps; i++) {
             resourceId = getResources().getIdentifier(name.toLowerCase().concat("_step_").concat(Integer.toString(i)), "drawable", getPackageName());
-            fragments.add(StepFragment.newInstance(i, resourceId));
+            fragments.add(OrigamiStepFragment.newInstance(i, resourceId));
         }
 
-        fragments.add(StepFragment.newInstance(0, getResources().getIdentifier(name.toLowerCase().concat("_finished"), "drawable", getPackageName())));
+        fragments.add(OrigamiStepFragment.newInstance(0, getResources().getIdentifier(name.toLowerCase().concat("_finished"), "drawable", getPackageName())));
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 

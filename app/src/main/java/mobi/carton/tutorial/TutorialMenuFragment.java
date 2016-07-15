@@ -11,6 +11,10 @@ import mobi.carton.CartonFragment;
 import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
 
+
+/**
+ * A fragment to show the Tutorial feature in the main menu
+ */
 public class TutorialMenuFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {

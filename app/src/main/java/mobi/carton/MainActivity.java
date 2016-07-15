@@ -21,6 +21,10 @@ import mobi.carton.tutorial.TutorialActivity;
 import mobi.carton.tutorial.TutorialMenuFragment;
 import mobi.carton.tutorial.Utils;
 
+
+/**
+ * MainActivity which is the first launched activity handle fragments for the menu
+ */
 public class MainActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,

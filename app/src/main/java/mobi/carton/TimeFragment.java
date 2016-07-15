@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+/**
+ * A fragment that shows the time (clock) in the main menu
+ */
 public class TimeFragment extends CartonFragment {
 
 
