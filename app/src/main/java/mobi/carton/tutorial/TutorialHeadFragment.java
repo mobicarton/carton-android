@@ -11,6 +11,10 @@ import android.widget.TextView;
 import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
 
+
+/**
+ * Fragment which include a needle to indicate and help learning Head gesture
+ */
 public class TutorialHeadFragment extends Fragment
         implements
         HeadRecognition.OnHeadTrackingListener {

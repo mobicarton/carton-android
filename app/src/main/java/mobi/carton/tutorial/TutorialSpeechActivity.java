@@ -19,6 +19,9 @@ import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * Activity of the tutorial to handle the part related to Speech Recognition
+ */
 public class TutorialSpeechActivity extends CartonActivity implements
         HeadRecognition.OnHeadGestureListener,
         ContinuousSpeechRecognition.OnTextListener,

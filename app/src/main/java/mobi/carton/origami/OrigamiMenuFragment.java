@@ -12,6 +12,9 @@ import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * A fragment to show the Origami feature in the main menu
+ */
 public class OrigamiMenuFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {

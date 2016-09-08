@@ -10,6 +10,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
+/**
+ * Indicators (as little circle) to the menu's ViewPager
+ */
 public class ViewPagerIndicators extends View
         implements
         ViewPager.OnPageChangeListener {
@@ -24,6 +27,9 @@ public class ViewPagerIndicators extends View
     private int mActive = 0;
 
 
+    /**
+     * Constructor to initiate some variable and get radius and color from xml
+     */
     public ViewPagerIndicators(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -74,6 +80,10 @@ public class ViewPagerIndicators extends View
     }
 
 
+    /**
+     *
+     * @param viewPager ViewPager to add theses indicators
+     */
     public void setViewPager(ViewPager viewPager) {
         mCount = viewPager.getAdapter().getCount();
         setActiveItem(viewPager.getCurrentItem());

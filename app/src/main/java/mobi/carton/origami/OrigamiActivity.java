@@ -15,6 +15,9 @@ import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * This activity handle the Origami menu
+ */
 public class OrigamiActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,

@@ -15,6 +15,10 @@ import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
+
+/**
+ * First Activity of the tutorial to handle the part related to Finger gesture
+ */
 public class TutorialActivity extends CartonActivity
         implements
         CustomViewPager.OnScrollListener {

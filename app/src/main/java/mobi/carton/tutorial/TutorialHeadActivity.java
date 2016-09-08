@@ -15,6 +15,9 @@ import mobi.carton.library.CartonActivity;
 import mobi.carton.library.HeadRecognition;
 
 
+/**
+ * Activity of the tutorial to handle the part related to Head gesture Recognition
+ */
 public class TutorialHeadActivity extends CartonActivity implements
         HeadRecognition.OnHeadGestureListener,
         CustomViewPager.OnScrollListener {

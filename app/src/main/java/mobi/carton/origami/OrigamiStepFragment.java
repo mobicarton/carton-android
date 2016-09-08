@@ -10,15 +10,18 @@ import android.widget.ImageView;
 import mobi.carton.R;
 
 
-public class StepFragment extends Fragment {
+/**
+ * A fragment to show a step (image with its position)
+ */
+public class OrigamiStepFragment extends Fragment {
 
 
     private static final String ARG_POSITION = "arg_position";
     private static final String ARG_IMG_ID = "arg_img_id";
 
 
-    public static StepFragment newInstance(int position, int resId) {
-        StepFragment fragment = new StepFragment();
+    public static OrigamiStepFragment newInstance(int position, int resId) {
+        OrigamiStepFragment fragment = new OrigamiStepFragment();
 
         Bundle args = new Bundle();
         args.putInt(ARG_POSITION, position);
@@ -30,7 +33,7 @@ public class StepFragment extends Fragment {
     }
 
 
-    public StepFragment() {
+    public OrigamiStepFragment() {
 
     }
 

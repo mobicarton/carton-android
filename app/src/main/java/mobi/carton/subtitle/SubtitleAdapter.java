@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 import mobi.carton.R;
 
+
+/**
+ * Adapter for subtitle, very simple data-bind just a single text
+ */
 public class SubtitleAdapter extends RecyclerView.Adapter<SubtitleViewHolder> {
 
 
@@ -46,6 +50,10 @@ public class SubtitleAdapter extends RecyclerView.Adapter<SubtitleViewHolder> {
     }
 
 
+    /**
+     * Method to add (and show) a new subtitle
+     * @param subtitle subtitle to add
+     */
     public void add(String subtitle) {
         mSubtitles.add(0, subtitle);
         notifyItemInserted(0);
