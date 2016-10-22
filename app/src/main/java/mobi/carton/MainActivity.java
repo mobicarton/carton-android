@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import mobi.carton.compatible.CompatibleAppsMenuFragment;
 import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.CartonSdk;
@@ -38,6 +39,11 @@ public class MainActivity extends CartonActivity
     private MenuPagerAdapter mMenuPagerAdapter;
 
 
+    /*
+    LIFECYCLE
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,10 @@ public class MainActivity extends CartonActivity
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(CartonSdk.CATEGORY);
         List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
+        if (resolveInfos.size() > 0) {
+            fragments.add(Fragment.instantiate(this, CompatibleAppsMenuFragment.class.getName()));
+        }
+
         Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
         for(ResolveInfo info : resolveInfos) {
             ApplicationInfo applicationInfo = info.activityInfo.applicationInfo;
@@ -100,6 +110,12 @@ public class MainActivity extends CartonActivity
     }
 
 
+    /*
+    IMPLEMENTS
+     */
+
+
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onTilt(int direction) {
         switch (direction) {
@@ -113,12 +129,14 @@ public class MainActivity extends CartonActivity
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onNod(int direction) {
 
     }
 
 
+    // CustomViewPager.OnScrollListener
     @Override
     public void onScroll(int direction) {
         CartonFragment cartonFragment = (CartonFragment) mMenuPagerAdapter.getItem(mViewPager.getCurrentItem());

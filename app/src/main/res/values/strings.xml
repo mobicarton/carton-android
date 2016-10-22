@@ -36,7 +36,11 @@
     <!--
     Compatible Apps
     -->
+
     <string name="icon">Icon</string>
+    
+    <string name="compatible_apps">My Library of compatible applications with Carton</string>
+
 
     <!--
     Origami
