@@ -3,35 +3,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:padding="24dp"
     android:gravity="center_vertical">
 
 
-    <ImageView
-        android:id="@+id/imageView_appIcon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:contentDescription="@string/icon"/>
-
-    <TextView
-        android:id="@+id/textView_appDescription"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView_appIcon"
-        android:layout_toRightOf="@+id/imageView_appIcon"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="@dimen/font_small"/>
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@drawable/border"
+        android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/textView_appName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView_appIcon"
-        android:singleLine="true"
-        android:fontFamily="sans-serif-light"
-        android:textSize="@dimen/font_extra_large"/>
+        <ImageView
+            android:id="@+id/imageView_appIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@string/icon"/>
+
+        <TextView
+            android:id="@+id/textView_appDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_appIcon"
+            android:layout_toRightOf="@+id/imageView_appIcon"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="@dimen/font_small"/>
+
+        <TextView
+            android:id="@+id/textView_appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView_appIcon"
+            android:maxLines="1"
+            android:fontFamily="sans-serif-light"
+            android:textSize="@dimen/font_extra_large"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
