@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="text_launch_advice">Place your phone into your Carton</string>
-    <string name="text_without">You don\'t have any Carton ?"</string>
-    <string name="text_visit">visit <u>carton.mobi</u> and build your own</string>
+    <string name="text_launch_advice">Place your phone into your Carton viewer</string>
+    <string name="text_without">You don\'t have any Carton viewer?"</string>
+    <string name="text_visit">Visit <u>carton.mobi</u> and build your own.</string>
 
     <string name="button_try">or try without</string>
 
