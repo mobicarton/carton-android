@@ -1,5 +1,6 @@
 package mobi.carton.compatible;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,8 @@ import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
 
 /**
- * @author damienbrun
+ * Displays the tile dedicated to Compatible Apps in the main menu
  */
-
 public class CompatibleAppsMenuFragment extends CartonFragment
         implements
         HeadRecognition.OnHeadGestureListener {
@@ -68,7 +68,7 @@ public class CompatibleAppsMenuFragment extends CartonFragment
 
     private void actionDirection(int direction) {
         if (direction == HeadRecognition.NOD_DOWN) {
-            //startActivity(new Intent(getContext(), CompatibleAppsActivity.class));
+            startActivity(new Intent(getContext(), CompatibleAppsActivity.class));
         }
     }
 }

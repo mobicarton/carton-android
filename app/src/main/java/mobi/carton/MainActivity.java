@@ -1,14 +1,12 @@
 package mobi.carton;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import mobi.carton.compatible.CompatibleAppsMenuFragment;
@@ -64,12 +62,6 @@ public class MainActivity extends CartonActivity
         List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
         if (resolveInfos.size() > 0) {
             fragments.add(Fragment.instantiate(this, CompatibleAppsMenuFragment.class.getName()));
-        }
-
-        Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(packageManager));
-        for(ResolveInfo info : resolveInfos) {
-            ApplicationInfo applicationInfo = info.activityInfo.applicationInfo;
-            fragments.add(AppCompatibleFragment.newInstance(applicationInfo));
         }
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
