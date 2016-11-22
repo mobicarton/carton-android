@@ -18,12 +18,13 @@ public class HeadRecognition
 
     /**
      * Used for receiving notifications from the HeadRecognition when
-     * gesture such as tilt and nod have been detected.
+     * gesture such as tilt, nod or shake have been detected.
      */
     public interface OnHeadGestureListener {
 
         void onTilt(int direction);
         void onNod(int direction);
+        //void onShake();
     }
 
 
@@ -36,11 +37,18 @@ public class HeadRecognition
         void onDirectionChanged(int azimuth, int pitch, int roll);
     }
 
-
+    /*
+    CONSTANTS
+     */
     public static final int TILT_RIGHT = 0;
     public static final int TILT_LEFT = 1;
     public static final int NOD_UP = 2;
     public static final int NOD_DOWN = 3;
+
+    /**
+     * Number of changing direction needed to detect a shaking gesture
+     */
+    private static final int SHAKE_NB_CHANGING_DIRECTION = 5;
 
 
     /**
