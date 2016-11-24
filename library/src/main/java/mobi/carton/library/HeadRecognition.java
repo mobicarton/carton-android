@@ -7,6 +7,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import java.util.LinkedList;
+
 /**
  * This helper class is about using sensor fusion to get the direction of the phone, and
  * also using this direction to recognize different kind of head gesture
@@ -24,7 +26,7 @@ public class HeadRecognition
 
         void onTilt(int direction);
         void onNod(int direction);
-        //void onShake();
+        void onShake();
     }
 
 
@@ -77,7 +79,46 @@ public class HeadRecognition
     private static final int NOD_THRESHOLD = 15;
 
 
+    /**
+     * Arbitrary maximum angle to detect shaking : 180° (above it is quiet uncommon)
+     */
+    private static final int SHAKING_MAX_ANGLE = 180;
+
+
+    /**
+     * Number of changing direction needed to recognize a shaking gesture
+     */
+    private static final int SHAKING_COUNT = 5;
+
+
+    /**
+     * Delay maximum in milliseconds to realize the number of changing direction
+     * needed to recognize a shaking gesture
+     */
+    private static final int SHAKING_DELAY = 1000;
+
+
+    /*
+    VARIABLES
+     */
     private SensorManager mSensorManager;
+
+
+    /**
+     * Use to save the lastAzimuth value in order to detect
+     * the direction (right/left) of the moving head
+     */
+    private int lastAzimuth;
+
+
+    /**
+     * Use to save the last direction, in order to detect each changing direction
+     * True for the right and False for left
+     */
+    private boolean directionToRight;
+
+
+    private LinkedList<Long> changingDirectionQueue;
 
 
     /**
@@ -111,6 +152,8 @@ public class HeadRecognition
      */
     public HeadRecognition(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+
+        changingDirectionQueue = new LinkedList<>();
     }
 
 
@@ -165,9 +208,46 @@ public class HeadRecognition
                 }
                 nodTime = -1;
             }
+
+            int difference = azimuth - lastAzimuth;
+
+            // moving right
+            if ((difference > 0 && difference < SHAKING_MAX_ANGLE) || difference < -SHAKING_MAX_ANGLE) {
+                if (!directionToRight) {
+                    changingDirection();
+                }
+            }
+
+            // moving left
+            if ((difference < 0 && difference > -SHAKING_MAX_ANGLE) || difference > SHAKING_MAX_ANGLE) {
+                if (directionToRight) {
+                    changingDirection();
+                }
+            }
+
+            // update lastAzimuth for next event
+            lastAzimuth = azimuth;
         }
     }
 
+
+    private void changingDirection() {
+        directionToRight = !directionToRight;
+
+        changingDirectionQueue.addFirst(System.currentTimeMillis());
+
+        if (changingDirectionQueue.size() > SHAKING_COUNT) {
+            changingDirectionQueue.removeLast();
+
+            long difference = changingDirectionQueue.getFirst() - changingDirectionQueue.getLast();
+            if (difference < SHAKING_DELAY) {
+                changingDirectionQueue.clear();
+                if (mOnHeadGestureListener != null) {
+                    mOnHeadGestureListener.onShake();
+                }
+            }
+        }
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {

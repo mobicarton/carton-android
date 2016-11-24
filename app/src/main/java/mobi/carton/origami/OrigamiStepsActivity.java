@@ -132,6 +132,12 @@ public class OrigamiStepsActivity extends CartonActivity
 
 
     @Override
+    public void onShake() {
+
+    }
+
+
+    @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }

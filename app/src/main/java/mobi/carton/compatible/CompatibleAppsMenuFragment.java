@@ -61,6 +61,12 @@ public class CompatibleAppsMenuFragment extends CartonFragment
 
 
     @Override
+    public void onShake() {
+
+    }
+
+
+    @Override
     public void movingDirection(int direction) {
         actionDirection(direction);
     }

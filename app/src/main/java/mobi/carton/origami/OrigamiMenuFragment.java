@@ -63,6 +63,12 @@ public class OrigamiMenuFragment extends CartonFragment
 
 
     @Override
+    public void onShake() {
+
+    }
+
+
+    @Override
     public void movingDirection(int direction) {
         actionDirection(direction);
     }

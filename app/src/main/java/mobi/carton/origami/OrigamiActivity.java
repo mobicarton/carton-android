@@ -106,6 +106,12 @@ public class OrigamiActivity extends CartonActivity
 
 
     @Override
+    public void onShake() {
+
+    }
+
+
+    @Override
     public void onScroll(int direction) {
         action(direction);
     }

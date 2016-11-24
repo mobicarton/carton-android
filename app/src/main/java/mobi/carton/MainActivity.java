@@ -128,6 +128,13 @@ public class MainActivity extends CartonActivity
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
+    @Override
+    public void onShake() {
+
+    }
+
+
     // CustomViewPager.OnScrollListener
     @Override
     public void onScroll(int direction) {

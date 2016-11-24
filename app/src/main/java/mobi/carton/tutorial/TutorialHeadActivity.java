@@ -91,6 +91,12 @@ public class TutorialHeadActivity extends CartonActivity implements
 
 
     @Override
+    public void onShake() {
+
+    }
+
+
+    @Override
     public void onScroll(int direction) {
         actionDirection(direction);
     }
