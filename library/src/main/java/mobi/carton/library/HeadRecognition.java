@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -98,6 +99,12 @@ public class HeadRecognition
     private static final int SHAKING_DELAY = 1000;
 
 
+    /**
+     * Angle maximum allow to the delta used to calibrate the nod gesture
+     */
+    private static final int DELTA_NOD_MAX_ANGLE = 45;
+
+
     /*
     VARIABLES
      */
@@ -145,6 +152,18 @@ public class HeadRecognition
 
 
     /**
+     * Use to calibrate nod gesture when the mobile phone is not exactly horizontal
+     */
+    private int deltaNod;
+
+
+    /**
+     * Use to save the current (last) roll angle needed for auto calibrate deltaNod
+     */
+    private int mRoll;
+
+
+    /**
      * Constructor that is called when instantiate a HeadRecognition object.
      *
      * @param context The context the HeadRecognition is running, through which it
@@ -154,6 +173,7 @@ public class HeadRecognition
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
         changingDirectionQueue = new LinkedList<>();
+        deltaNod = 0;
     }
 
 
@@ -165,11 +185,11 @@ public class HeadRecognition
 
             int azimuth = (int) (Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[0]) + 360) % 360;
             int pitch = (int) (Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[1]));
-            int roll = (int) Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[2]);
-            roll = roll < 0 ? roll + 180 : roll - 180;
+            mRoll = (int) Math.toDegrees(SensorManager.getOrientation(rotationMatrix, orientation)[2]);
+            mRoll = mRoll < 0 ? mRoll + 180 : mRoll - 180;
 
             if (mOnHeadTrackingListener != null)
-                mOnHeadTrackingListener.onDirectionChanged(azimuth, pitch, roll);
+                mOnHeadTrackingListener.onDirectionChanged(azimuth, pitch, mRoll);
 
             // TODO: use directly radian instead of degree to avoid some useless computing
             if (tiltTime == -1) { // if head was straight
@@ -191,20 +211,23 @@ public class HeadRecognition
             }
 
             // TODO : the same as Tilt, should create a method
+            Log.d("HeadRecognition", "Roll > " + mRoll);
+
             if (nodTime == -1) {
-                if (roll >= NOD_THRESHOLD) {
+                if ((mRoll + deltaNod) >= NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();
                     nodSide = NOD_UP;
-                } else if (roll <= -NOD_THRESHOLD) {
+                } else if ((mRoll + deltaNod) <= -NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();
                     nodSide = NOD_DOWN;
                 }
             }
-            if (nodTime != -1 && (roll <= 5 && roll >= -5)) {
+            if (nodTime != -1 && ((mRoll + deltaNod) <= 5 && (mRoll + deltaNod) >= -5)) {
                 long delay = System.currentTimeMillis() - nodTime;
                 if (delay <= NOD_TIME) {
-                    if (mOnHeadGestureListener != null)
+                    if (mOnHeadGestureListener != null) {
                         mOnHeadGestureListener.onNod(nodSide);
+                    }
                 }
                 nodTime = -1;
             }
@@ -287,5 +310,28 @@ public class HeadRecognition
      */
     public void setOnHeadTrackingListener(OnHeadTrackingListener l) {
         mOnHeadTrackingListener = l;
+    }
+
+
+    /**
+     * Set a delta (to maximum 45°) used to virtually make the mobile horizontal
+     * and then detect properly the nod gesture
+     * @param deltaNod new delta value
+     */
+    public void setDeltaNod(int deltaNod) {
+        if (deltaNod < -DELTA_NOD_MAX_ANGLE)
+            deltaNod = -DELTA_NOD_MAX_ANGLE;
+        if (deltaNod > DELTA_NOD_MAX_ANGLE) {
+            deltaNod = DELTA_NOD_MAX_ANGLE;
+        }
+        this.deltaNod = deltaNod;
+    }
+
+
+    /**
+     * Calibrate the deltaNod based on the current roll angle (limited to 45° maximum)
+     */
+    public void autoCalibrateDeltaNod() {
+        setDeltaNod(-mRoll);
     }
 }
