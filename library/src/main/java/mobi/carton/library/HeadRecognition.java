@@ -173,6 +173,7 @@ public class HeadRecognition
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
         changingDirectionQueue = new LinkedList<>();
+        // TODO: by default if not define in constructor get it from saved preferences
         deltaNod = 0;
     }
 
