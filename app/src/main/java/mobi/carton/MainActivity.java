@@ -22,7 +22,7 @@ import mobi.carton.tutorial.Utils;
 
 
 /**
- * MainActivity which is the first launched activity handle fragments for the menu
+ * MainActivity which is the first launched activity handle fragments for the main menu
  */
 public class MainActivity extends CartonActivity
         implements
@@ -30,10 +30,22 @@ public class MainActivity extends CartonActivity
         CustomViewPager.OnScrollListener {
 
 
+    /**
+     * Use built-in Head Gesture Recognition to go through the menu (Right/Left with tilting)
+     */
     private HeadRecognition mHeadRecognition;
 
+
+    /**
+     * Use CustomViewPager (implementing gesture listener) to handle the sliding inside the menu
+     */
     private CustomViewPager mViewPager;
 
+
+    // TODO: update comment here
+    /**
+     * FragmentPageAdapter used to retrieve the Fragment when scrolling
+     */
     private MenuPagerAdapter mMenuPagerAdapter;
 
 
@@ -42,6 +54,13 @@ public class MainActivity extends CartonActivity
      */
 
 
+    /**
+     * Start the Default Launcher.
+     * Add each part of the menu (Clock, Origami Helper, Compass, Compatible Apps,
+     * OnLive Subtitle and Tutorial.
+     * Add indicators to the menu (which look like small dots)
+     * Make sure to launch the Tutorial first if it's the first launch of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +75,7 @@ public class MainActivity extends CartonActivity
         fragments.add(Fragment.instantiate(this, OrigamiMenuFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CompassFragment.class.getName()));
 
+        // Get the list of apps which are compatible with Carton Viewer
         PackageManager packageManager = getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(CartonSdk.CATEGORY);
@@ -73,6 +93,7 @@ public class MainActivity extends CartonActivity
         mViewPager.setAdapter(mMenuPagerAdapter);
         mViewPager.setOnScrollListener(this);
 
+        // add indicators (which look like small dot) in the main menu
         ViewPagerIndicators viewPagerIndicators = (ViewPagerIndicators) findViewById(R.id.viewPagerIndicators);
         viewPagerIndicators.setViewPager(mViewPager);
 

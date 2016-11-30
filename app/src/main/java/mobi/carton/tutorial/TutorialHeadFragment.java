@@ -20,7 +20,12 @@ public class TutorialHeadFragment extends Fragment
         HeadRecognition.OnHeadTrackingListener {
 
 
+    /**
+     * Use to pass some textual description/instruction of the tutorial step
+     */
     private static final String ARG_DESCRIPTION = "arg_description";
+
+
     private static final String ARG_IS_TILT = "arg_is_titl";
 
 

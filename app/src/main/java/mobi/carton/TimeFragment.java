@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 public class TimeFragment extends CartonFragment {
 
 
+    /**
+     * Use the TextClock widget (which is created from the xml) to provide a simple clock
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

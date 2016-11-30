@@ -21,13 +21,25 @@ public class NeedleView extends View {
     private Paint mPaint;
 
 
+    /*
+    PosX, PosY, CenterX, CenterY and Radius are related to the size of the view
+     */
     private int mPosX;
     private int mPosY;
     private int mCenterX;
     private int mCenterY;
     private int mRadius;
+
+
+    /**
+     * Angle of the current needle
+     */
     private int mAngle;
 
+
+    /**
+     * Use to define if the orientation of the needle is vertical (true) or horizontal (false)
+     */
     private boolean mOrientationVertical;
 
 
@@ -42,7 +54,8 @@ public class NeedleView extends View {
 
 
     /**
-     * Constructor
+     * Constructor which retrieve the attributes: orientation (vertical/horizontal) and
+     * the color, width, angle of the needle
      */
     public NeedleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);

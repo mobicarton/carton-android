@@ -5,9 +5,22 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 
-public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
+/**
+ * This class come strictly from the official Android documentation
+ * https://developer.android.com/training/animation/screen-slide.html
+ *
+ * Used in a ViewPager it makes a little bit Zoom-Out during transition between pages
+ */
+public class ZoomOutPageTransformer
+        implements
+        ViewPager.PageTransformer {
+
+
     private static final float MIN_SCALE = 0.85f;
+
+
     private static final float MIN_ALPHA = 0.5f;
+
 
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();

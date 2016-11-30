@@ -22,19 +22,32 @@ import mobi.carton.library.HeadRecognition;
 /**
  * Activity of the tutorial to handle the part related to Speech Recognition
  */
-public class TutorialSpeechActivity extends CartonActivity implements
+public class TutorialSpeechActivity extends CartonActivity
+        implements
         HeadRecognition.OnHeadGestureListener,
-        ContinuousSpeechRecognition.OnTextListener,
         CustomViewPager.OnScrollListener,
+        ContinuousSpeechRecognition.OnTextListener,
         ContinuousSpeechRecognition.OnRmsListener {
 
 
     private CustomViewPager mViewPager;
 
+    /**
+     * Use built-in Head Gesture Recognition API to provide multimodal interactions
+     */
     private HeadRecognition mHeadRecognition;
 
+
+    /**
+     * ProgressBar which show the volume of the listening sounds
+     */
     private ProgressBar mProgressBarRms;
     private ContinuousSpeechRecognition mContinuousSpeechRecognition;
+
+
+    /*
+    LIFECYCLE
+     */
 
 
     @Override
@@ -93,37 +106,6 @@ public class TutorialSpeechActivity extends CartonActivity implements
     }
 
 
-    @Override
-    public void onTilt(int direction) {
-        switch (direction) {
-            case HeadRecognition.TILT_RIGHT:
-                mViewPager.nextPage();
-                break;
-            case HeadRecognition.TILT_LEFT:
-                mViewPager.previousPage();
-                break;
-        }
-    }
-
-
-    @Override
-    public void onNod(int direction) {
-        actionDirection(direction);
-    }
-
-
-    @Override
-    public void onShake() {
-
-    }
-
-
-    @Override
-    public void onScroll(int direction) {
-        actionDirection(direction);
-    }
-
-
     private void actionDirection(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_UP:
@@ -139,6 +121,47 @@ public class TutorialSpeechActivity extends CartonActivity implements
     }
 
 
+    /*
+    IMPLEMENTS
+     */
+
+
+    // HeadRecognition.OnHeadGestureListener
+    @Override
+    public void onTilt(int direction) {
+        switch (direction) {
+            case HeadRecognition.TILT_RIGHT:
+                mViewPager.nextPage();
+                break;
+            case HeadRecognition.TILT_LEFT:
+                mViewPager.previousPage();
+                break;
+        }
+    }
+
+
+    // HeadRecognition.OnHeadGestureListener
+    @Override
+    public void onNod(int direction) {
+        actionDirection(direction);
+    }
+
+
+    // HeadRecognition.OnHeadGestureListener
+    @Override
+    public void onShake() {
+
+    }
+
+
+    // CustomViewPager.OnScrollListener
+    @Override
+    public void onScroll(int direction) {
+        actionDirection(direction);
+    }
+
+
+    // ContinuousSpeechRecognition.OnTextListener
     @Override
     public void onTextMatched(ArrayList<String> matchedText) {
         Log.d("onTextMatched", matchedText.toString());
@@ -161,12 +184,14 @@ public class TutorialSpeechActivity extends CartonActivity implements
     }
 
 
+    // ContinuousSpeechRecognition.OnTextListener
     @Override
     public void onError(int error) {
 
     }
 
 
+    // ContinuousSpeechRecognition.OnRmsListener
     @Override
     public void onRmsChanged(float rms) {
         mProgressBarRms.setProgress((int) (rms * 10));

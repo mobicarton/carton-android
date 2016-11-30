@@ -11,7 +11,7 @@ import android.view.View;
 
 
 /**
- * Indicators (as little circle) to the menu's ViewPager
+ * Indicators (as little circle/dot) to the menu's ViewPager
  */
 public class ViewPagerIndicators extends View
         implements
@@ -28,7 +28,7 @@ public class ViewPagerIndicators extends View
 
 
     /**
-     * Constructor to initiate some variable and get radius and color from xml
+     * Constructor to initiate some variable and get radius and color from xml (attributes)
      */
     public ViewPagerIndicators(Context context, AttributeSet attrs) {
         super(context, attrs);

@@ -17,7 +17,8 @@ import mobi.carton.library.HeadRecognition;
 
 
 /**
- * First Activity of the tutorial to handle the part related to Finger gesture
+ * First step of the tutorial to handle the part related to Finger gesture.
+ * There is purposely no Head Gesture Recognition handled in this activity.
  */
 public class TutorialActivity extends CartonActivity
         implements
@@ -50,6 +51,7 @@ public class TutorialActivity extends CartonActivity
     }
 
 
+    // CustomViewPager.OnScrollListener
     @Override
     public void onScroll(int direction) {
         switch (direction) {

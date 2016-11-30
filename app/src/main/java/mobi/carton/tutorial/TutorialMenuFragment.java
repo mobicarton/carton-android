@@ -20,7 +20,16 @@ public class TutorialMenuFragment extends CartonFragment
         HeadRecognition.OnHeadGestureListener {
 
 
+    // TODO: should use it in the activity
+    /**
+     * Use built-in Head Gesture Recognition API to provide multimodal interactions
+     */
     private HeadRecognition mHeadRecognition;
+
+
+    /*
+    LIFECYCLE
+     */
 
 
     @Override
@@ -48,12 +57,26 @@ public class TutorialMenuFragment extends CartonFragment
     }
 
 
+    private void actionDirection(int direction) {
+        if (direction == HeadRecognition.NOD_DOWN) {
+            startActivity(new Intent(getContext(), TutorialActivity.class));
+        }
+    }
+
+
+    /*
+    IMPLEMENTS
+     */
+
+
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onTilt(int direction) {
 
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onNod(int direction) {
         if (getUserVisibleHint()) {
@@ -62,21 +85,16 @@ public class TutorialMenuFragment extends CartonFragment
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onShake() {
 
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void movingDirection(int direction) {
         actionDirection(direction);
-    }
-
-
-    private void actionDirection(int direction) {
-        if (direction == HeadRecognition.NOD_DOWN) {
-            startActivity(new Intent(getContext(), TutorialActivity.class));
-        }
     }
 }

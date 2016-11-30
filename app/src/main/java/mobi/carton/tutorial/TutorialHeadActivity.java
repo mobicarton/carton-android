@@ -25,7 +25,15 @@ public class TutorialHeadActivity extends CartonActivity implements
 
     private CustomViewPager mViewPager;
 
+    /**
+     * Use built-in Head Gesture Recognition API to provide multimodal interactions
+     */
     private HeadRecognition mHeadRecognition;
+
+
+    /*
+    LIFECYCLE
+     */
 
 
     @Override
@@ -71,6 +79,25 @@ public class TutorialHeadActivity extends CartonActivity implements
     }
 
 
+    private void actionDirection(int direction) {
+        switch (direction) {
+            case HeadRecognition.NOD_DOWN:
+                Intent intent = new Intent(this, TutorialSpeechActivity.class);
+                startActivity(intent);
+                break;
+            case HeadRecognition.NOD_UP:
+                onBackPressed();
+                break;
+        }
+    }
+
+
+    /*
+    IMPLEMENTS
+     */
+
+
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onTilt(int direction) {
         switch (direction) {
@@ -84,33 +111,23 @@ public class TutorialHeadActivity extends CartonActivity implements
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onNod(int direction) {
         actionDirection(direction);
     }
 
 
+    // HeadRecognition.OnHeadGestureListener
     @Override
     public void onShake() {
 
     }
 
 
+    // CustomViewPager.OnScrollListener
     @Override
     public void onScroll(int direction) {
         actionDirection(direction);
-    }
-
-
-    private void actionDirection(int direction) {
-        switch (direction) {
-            case HeadRecognition.NOD_DOWN:
-                Intent intent = new Intent(this, TutorialSpeechActivity.class);
-                startActivity(intent);
-                break;
-            case HeadRecognition.NOD_UP:
-                onBackPressed();
-                break;
-        }
     }
 }

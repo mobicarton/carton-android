@@ -18,7 +18,14 @@ import mobi.carton.R;
 public class TutorialFragment extends Fragment {
 
 
+    /**
+     * Use to pass some textual description/instruction of the tutorial step
+     */
     private static final String ARG_DESCRIPTION = "arg_description";
+
+    /**
+     * Use to pass the ID of the image to show
+     */
     private static final String ARG_IMG_ID = "arg_img_id";
 
 

@@ -22,8 +22,15 @@ public class CustomViewPager extends ViewPager
     }
 
 
+    /**
+     * Use GestureDetector to detect the swipe with onFling event
+     */
     private GestureDetector mDetector;
 
+
+    /**
+     *
+     */
     private OnScrollListener mOnScrollListener;
 
 
@@ -32,6 +39,9 @@ public class CustomViewPager extends ViewPager
     }
 
 
+    /**
+     * Constructor
+     */
     public CustomViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDetector = new GestureDetector(context, this);
@@ -58,6 +68,10 @@ public class CustomViewPager extends ViewPager
     }
 
 
+    /**
+     * Retrieve the angle of the movement and define in which direction the finger motion occurred
+     * @return It return the direction (up or down)
+     */
     private int getDirection(float x1, float y1, float x2, float y2) {
         Double angle = Math.toDegrees(Math.atan2(y1 - y2, x2 - x1));
 
@@ -91,6 +105,7 @@ public class CustomViewPager extends ViewPager
      */
 
 
+    // View.OnTouchListener
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (!CartonPrefs.getWithoutCarton(getContext())) {
@@ -100,36 +115,42 @@ public class CustomViewPager extends ViewPager
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public void onShowPress(MotionEvent e) {
 
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         return false;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return false;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public void onLongPress(MotionEvent e) {
 
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (mOnScrollListener != null) {
