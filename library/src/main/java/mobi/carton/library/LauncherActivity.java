@@ -27,7 +27,15 @@ public class LauncherActivity extends Activity
     public static final String EXTRA_WITHOUT = "extra_without";
 
 
+    /**
+     * Use the built-in Head Gesture Recognition API to track the roll angle of the mobile
+     */
     private HeadRecognition mHeadRecognition;
+
+
+    /*
+    LIFECYCLE
+    */
 
 
     @Override
@@ -57,7 +65,7 @@ public class LauncherActivity extends Activity
 
     /**
      * When user click on the link to the official website
-     * Then launch implicit intent
+     * then launch implicit intent
      */
     public void clickVisit(View v) {
         Intent intent = new Intent();
@@ -70,7 +78,7 @@ public class LauncherActivity extends Activity
 
     /**
      * When user click on the button to launch app without using CARTON device
-     * Then set extra to return app without using any CARTON device and remove the launcher
+     * then set extra to return app without using any CARTON device and remove the launcher
      */
     public void clickWithout(View v) {
         Intent intent = new Intent();
@@ -80,8 +88,15 @@ public class LauncherActivity extends Activity
     }
 
 
+    /*
+    IMPLEMENTS
+     */
+
+
+    // HeadRecognition.OnHeadTrackingListener
     /**
-     * Check: if the phone is horizontal then consider CARTON is used and remove the launcher
+     * Check if the mobile phone is horizontal then it consider CARTON is used,
+     * therefore the launcher is close
      */
     @Override
     public void onDirectionChanged(int azimuth, int pitch, int roll) {

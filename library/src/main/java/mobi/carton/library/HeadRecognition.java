@@ -48,11 +48,6 @@ public class HeadRecognition
     public static final int NOD_UP = 2;
     public static final int NOD_DOWN = 3;
 
-    /**
-     * Number of changing direction needed to detect a shaking gesture
-     */
-    private static final int SHAKE_NB_CHANGING_DIRECTION = 5;
-
 
     /**
      * Maximum delay between detecting tilt > {@link #TILT_THRESHOLD}
@@ -178,6 +173,93 @@ public class HeadRecognition
     }
 
 
+    /**
+     * Start HeadRecognition by registered a listener to the sensor service
+     */
+    public void start() {
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
+                SensorManager.SENSOR_DELAY_UI);
+    }
+
+
+    /**
+     * Stop HeadRecognition by unregistered listener to the sensor service
+     */
+    public void stop() {
+        mSensorManager.unregisterListener(this);
+    }
+
+
+    /**
+     * Register a callback to be invoked when a head gesture (tilt, nod) is detected
+     * @param l The callback that will run
+     */
+    public void setOnHeadGestureListener(OnHeadGestureListener l) {
+        mOnHeadGestureListener = l;
+    }
+
+
+    /**
+     * Register a callback to be invoked when head direction has changed
+     * @param l The callback that will run
+     */
+    public void setOnHeadTrackingListener(OnHeadTrackingListener l) {
+        mOnHeadTrackingListener = l;
+    }
+
+
+    /**
+     * Set a delta (to maximum 45°) used to virtually make the mobile horizontal
+     * and then detect properly the nod gesture
+     * @param deltaNod new delta value
+     */
+    public void setDeltaNod(int deltaNod) {
+        if (deltaNod < -DELTA_NOD_MAX_ANGLE)
+            deltaNod = -DELTA_NOD_MAX_ANGLE;
+        if (deltaNod > DELTA_NOD_MAX_ANGLE) {
+            deltaNod = DELTA_NOD_MAX_ANGLE;
+        }
+        this.deltaNod = deltaNod;
+    }
+
+
+    /**
+     * Calibrate the deltaNod based on the current roll angle (limited to 45° maximum)
+     */
+    public void autoCalibrateDeltaNod() {
+        setDeltaNod(-mRoll);
+    }
+
+
+    /**
+     * Store each new changing direction and trigger shaking detection if there are more than
+     * {@link #SHAKING_COUNT} changing direction under {@link #SHAKING_DELAY} milliseconds
+     */
+    private void changingDirection() {
+        directionToRight = !directionToRight;
+
+        changingDirectionQueue.addFirst(System.currentTimeMillis());
+
+        if (changingDirectionQueue.size() > SHAKING_COUNT) {
+            changingDirectionQueue.removeLast();
+
+            long difference = changingDirectionQueue.getFirst() - changingDirectionQueue.getLast();
+            if (difference < SHAKING_DELAY) {
+                changingDirectionQueue.clear();
+                if (mOnHeadGestureListener != null) {
+                    mOnHeadGestureListener.onShake();
+                }
+            }
+        }
+    }
+
+
+    /*
+    IMPLEMENTS
+     */
+
+
+    // SensorEventListener
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
@@ -255,84 +337,9 @@ public class HeadRecognition
     }
 
 
-    private void changingDirection() {
-        directionToRight = !directionToRight;
-
-        changingDirectionQueue.addFirst(System.currentTimeMillis());
-
-        if (changingDirectionQueue.size() > SHAKING_COUNT) {
-            changingDirectionQueue.removeLast();
-
-            long difference = changingDirectionQueue.getFirst() - changingDirectionQueue.getLast();
-            if (difference < SHAKING_DELAY) {
-                changingDirectionQueue.clear();
-                if (mOnHeadGestureListener != null) {
-                    mOnHeadGestureListener.onShake();
-                }
-            }
-        }
-    }
-
+    // SensorEventListener
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-
-    /**
-     * Start HeadRecognition by registered a listener to the sensor service
-     */
-    public void start() {
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
-                SensorManager.SENSOR_DELAY_UI);
-    }
-
-
-    /**
-     * Stop HeadRecognition by unregistered listener to the sensor service
-     */
-    public void stop() {
-        mSensorManager.unregisterListener(this);
-    }
-
-
-    /**
-     * Register a callback to be invoked when a head gesture (tilt, nod) is detected
-     * @param l The callback that will run
-     */
-    public void setOnHeadGestureListener(OnHeadGestureListener l) {
-        mOnHeadGestureListener = l;
-    }
-
-
-    /**
-     * Register a callback to be invoked when head direction has changed
-     * @param l The callback that will run
-     */
-    public void setOnHeadTrackingListener(OnHeadTrackingListener l) {
-        mOnHeadTrackingListener = l;
-    }
-
-
-    /**
-     * Set a delta (to maximum 45°) used to virtually make the mobile horizontal
-     * and then detect properly the nod gesture
-     * @param deltaNod new delta value
-     */
-    public void setDeltaNod(int deltaNod) {
-        if (deltaNod < -DELTA_NOD_MAX_ANGLE)
-            deltaNod = -DELTA_NOD_MAX_ANGLE;
-        if (deltaNod > DELTA_NOD_MAX_ANGLE) {
-            deltaNod = DELTA_NOD_MAX_ANGLE;
-        }
-        this.deltaNod = deltaNod;
-    }
-
-
-    /**
-     * Calibrate the deltaNod based on the current roll angle (limited to 45° maximum)
-     */
-    public void autoCalibrateDeltaNod() {
-        setDeltaNod(-mRoll);
     }
 }

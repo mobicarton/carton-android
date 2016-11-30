@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 
 /**
  * MirrorFrameLayout is similar to FrameLayout except that it is designed to reverse
- * horizontally the view, which is necessary if the app is used with a CARTON device
+ * horizontally the view, which is mandatory if the app is used with a CARTON device
  * because of the Pepper's ghost effect.
  */
 public class MirrorFrameLayout extends FrameLayout {

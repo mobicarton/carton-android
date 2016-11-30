@@ -16,22 +16,43 @@ import android.view.WindowManager;
 
 /**
  * A base activity that handles common functionality in the app. This includes screen
- * auto-configuration (size, border, brightness), default launcher, among others
+ * auto-configuration (size, border, brightness), default launcher, debug mode, etc.
  */
 public class CartonActivity extends FragmentActivity {
 
 
+    /**
+     * Use to pass in the intent if the app is launch with or without Carton Viewer (debug mode)
+     */
     public static final String EXTRA_WITHOUT_CARTON = "extra_without_carton";
 
+
+    /**
+     * Use to pass in the intent if the default launcher has to be launch or not
+     */
     public static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
 
+
+    /**
+     * Debug mode (when true) is used to launch the application without the horizontal reverse
+     * It is convenient for developer to try and check some interface design quickly.
+     */
     private boolean mDebug = false;
 
+
+    /**
+     * NoLauncher is used internally to prevent activity to launch the default Launcher
+     */
     private boolean mNoLauncher;
+
 
     //private TouchView mTouchView;
     //private boolean mTouchAdded;
 
+
+    /*
+    LIFECYCLE
+    */
 
     /**
      * Here we ensure to:
@@ -46,7 +67,7 @@ public class CartonActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);                  // turning off the title at the top of the screen
 
         Window window = getWindow();
 
@@ -54,8 +75,8 @@ public class CartonActivity extends FragmentActivity {
                           View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION           // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN                // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
 
@@ -98,27 +119,22 @@ public class CartonActivity extends FragmentActivity {
 
 
     /**
-     * Called to start default launcher, usually once at the beginning (during onCreate)
+     * Use onActivityResult to know from the Default Launcher if the app is
+     * launched without Carton Viewer (in debug mode)
      */
-    public void startDefaultLauncher() {
-        if (!mNoLauncher) {
-            Intent intent = new Intent(this, LauncherActivity.class);
-            startActivityForResult(intent, LauncherActivity.CODE_LAUNCHER);
-        }
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == LauncherActivity.CODE_LAUNCHER) {
             if (resultCode == RESULT_OK) {
                 boolean without = data.getBooleanExtra(LauncherActivity.EXTRA_WITHOUT, false);
                 CartonPrefs.setWithoutCarton(getApplicationContext(), without);
-                // "recreate" activity because setContentView (onCreate) already called
+
+                // "recreate" this activity because setContentView (onCreate) is already called
                 Intent intent = getIntent();
                 intent.putExtra(EXTRA_NO_LAUNCHER, true);
                 finish();
                 startActivity(intent);
+
             } else if (resultCode == RESULT_CANCELED) {
                 finish();
             }
@@ -204,6 +220,17 @@ public class CartonActivity extends FragmentActivity {
         MirrorFrameLayout frameLayout = new MirrorFrameLayout(this);
         frameLayout.addView(view);
         super.addContentView(frameLayout, params);
+    }
+
+
+    /**
+     * Called to start default launcher, usually once at the beginning (during onCreate)
+     */
+    public void startDefaultLauncher() {
+        if (!mNoLauncher) {
+            Intent intent = new Intent(this, LauncherActivity.class);
+            startActivityForResult(intent, LauncherActivity.CODE_LAUNCHER);
+        }
     }
 
 
