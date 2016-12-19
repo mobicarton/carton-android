@@ -11,11 +11,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.carton.CustomViewPager;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.csr.ContinuousSpeechRecognition;
 import mobi.carton.library.CartonActivity;
+import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 
 
@@ -26,7 +26,7 @@ public class OrigamiStepsActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
         ViewPager.OnPageChangeListener,
-        CustomViewPager.OnScrollListener,
+        CartonViewPager.OnScrollListener,
         ContinuousSpeechRecognition.OnTextListener {
 
 
@@ -34,7 +34,7 @@ public class OrigamiStepsActivity extends CartonActivity
     public final static String EXTRA_NB_STEPS = "extra_nb_steps";
 
 
-    private CustomViewPager mViewPager;
+    private CartonViewPager mViewPager;
     private int mNbSteps;
     private TextView mTextViewStepPosition;
     private ImageView mImageViewStepPosition;
@@ -73,7 +73,7 @@ public class OrigamiStepsActivity extends CartonActivity
         mTextViewStepPosition.setText("1");
         mImageViewStepPosition = (ImageView) findViewById(R.id.imageView_stepPosition);
 
-        mViewPager = (CustomViewPager) findViewById(R.id.viewPager_OrigamiSteps);
+        mViewPager = (CartonViewPager) findViewById(R.id.viewPager_OrigamiSteps);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setOffscreenPageLimit(3);
         final float scale = getResources().getDisplayMetrics().density;

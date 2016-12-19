@@ -9,13 +9,13 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.carton.CustomViewPager;
 import mobi.carton.MainActivity;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.csr.ContinuousSpeechRecognition;
 import mobi.carton.library.CartonActivity;
+import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 
 
@@ -25,12 +25,12 @@ import mobi.carton.library.HeadRecognition;
 public class TutorialSpeechActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
-        CustomViewPager.OnScrollListener,
+        CartonViewPager.OnScrollListener,
         ContinuousSpeechRecognition.OnTextListener,
         ContinuousSpeechRecognition.OnRmsListener {
 
 
-    private CustomViewPager mViewPager;
+    private CartonViewPager mViewPager;
 
     /**
      * Use built-in Head Gesture Recognition API to provide multimodal interactions
@@ -63,7 +63,7 @@ public class TutorialSpeechActivity extends CartonActivity
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager_tutorial);
+        mViewPager = (CartonViewPager) super.findViewById(R.id.viewPager_tutorial);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setOffscreenPageLimit(3);

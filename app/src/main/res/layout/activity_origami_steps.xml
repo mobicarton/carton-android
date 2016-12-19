@@ -7,7 +7,7 @@
     tools:context="mobi.carton.origami.OrigamiStepsActivity">
 
 
-    <mobi.carton.CustomViewPager
+    <mobi.carton.library.CartonViewPager
         android:id="@+id/viewPager_OrigamiSteps"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

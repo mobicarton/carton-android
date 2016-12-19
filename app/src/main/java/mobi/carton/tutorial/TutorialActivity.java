@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.carton.CustomViewPager;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
+import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 
 
@@ -22,7 +22,7 @@ import mobi.carton.library.HeadRecognition;
  */
 public class TutorialActivity extends CartonActivity
         implements
-        CustomViewPager.OnScrollListener {
+        CartonViewPager.OnScrollListener {
 
 
     @Override
@@ -38,7 +38,7 @@ public class TutorialActivity extends CartonActivity
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        CustomViewPager viewPager = (CustomViewPager) super.findViewById(R.id.viewPager_tutorial);
+        CartonViewPager viewPager = (CartonViewPager) super.findViewById(R.id.viewPager_tutorial);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         viewPager.setOffscreenPageLimit(3);

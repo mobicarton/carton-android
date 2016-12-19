@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import mobi.carton.CustomViewPager;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.CartonPrefs;
 import mobi.carton.library.CartonSdk;
+import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 
 /**
@@ -27,10 +27,10 @@ import mobi.carton.library.HeadRecognition;
 public class CompatibleAppsActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
-        CustomViewPager.OnScrollListener {
+        CartonViewPager.OnScrollListener {
 
 
-    private CustomViewPager mViewPager;
+    private CartonViewPager mViewPager;
 
     private HeadRecognition mHeadRecognition;
 
@@ -61,7 +61,7 @@ public class CompatibleAppsActivity extends CartonActivity
 
         MenuPagerAdapter pagerAdapter = new MenuPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager_Origami);
+        mViewPager = (CartonViewPager) super.findViewById(R.id.viewPager_Origami);
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setOffscreenPageLimit(3);

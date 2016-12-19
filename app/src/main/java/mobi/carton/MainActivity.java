@@ -13,6 +13,7 @@ import mobi.carton.compatible.CompatibleAppsMenuFragment;
 import mobi.carton.glass.CompassFragment;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.CartonSdk;
+import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 import mobi.carton.origami.OrigamiMenuFragment;
 import mobi.carton.subtitle.SubtitleFragment;
@@ -27,7 +28,7 @@ import mobi.carton.tutorial.Utils;
 public class MainActivity extends CartonActivity
         implements
         HeadRecognition.OnHeadGestureListener,
-        CustomViewPager.OnScrollListener {
+        CartonViewPager.OnScrollListener {
 
 
     /**
@@ -39,7 +40,7 @@ public class MainActivity extends CartonActivity
     /**
      * Use CustomViewPager (implementing gesture listener) to handle the sliding inside the menu
      */
-    private CustomViewPager mViewPager;
+    private CartonViewPager mViewPager;
 
 
     // TODO: update comment here
@@ -89,7 +90,7 @@ public class MainActivity extends CartonActivity
 
         mMenuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 
-        mViewPager = (CustomViewPager) super.findViewById(R.id.viewPager);
+        mViewPager = (CartonViewPager) super.findViewById(R.id.viewPager);
         mViewPager.setAdapter(mMenuPagerAdapter);
         mViewPager.setOnScrollListener(this);
 
@@ -128,7 +129,7 @@ public class MainActivity extends CartonActivity
         cartonFragment.movingDirection(direction);
     }
 
-    
+
     /*
     IMPLEMENTS
      */

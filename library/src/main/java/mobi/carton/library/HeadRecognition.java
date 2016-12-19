@@ -43,10 +43,10 @@ public class HeadRecognition
     /*
     CONSTANTS
      */
-    public static final int TILT_RIGHT = 0;
-    public static final int TILT_LEFT = 1;
-    public static final int NOD_UP = 2;
-    public static final int NOD_DOWN = 3;
+    public static final int TILT_RIGHT = CartonSdk.RIGHT;
+    public static final int TILT_LEFT = CartonSdk.LEFT;
+    public static final int NOD_UP = CartonSdk.UP;
+    public static final int NOD_DOWN = CartonSdk.DOWN;
 
 
     /**

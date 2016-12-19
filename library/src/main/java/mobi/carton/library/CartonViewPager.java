@@ -1,5 +1,4 @@
-package mobi.carton;
-
+package mobi.carton.library;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -8,18 +7,19 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import mobi.carton.library.CartonPrefs;
-import mobi.carton.library.HeadRecognition;
+/**
+ * Created by damienbrun on 18/12/2016.
+ */
 
-public class CustomViewPager extends ViewPager
+public class CartonViewPager extends ViewPager
         implements
         View.OnTouchListener,
         GestureDetector.OnGestureListener {
 
 
-    public interface OnScrollListener {
-        void onScroll(int direction);
-    }
+public interface OnScrollListener {
+    void onScroll(int direction);
+}
 
 
     /**
@@ -34,7 +34,7 @@ public class CustomViewPager extends ViewPager
     private OnScrollListener mOnScrollListener;
 
 
-    public CustomViewPager(Context context) {
+    public CartonViewPager(Context context) {
         super(context);
     }
 
@@ -42,7 +42,7 @@ public class CustomViewPager extends ViewPager
     /**
      * Constructor
      */
-    public CustomViewPager(Context context, AttributeSet attrs) {
+    public CartonViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDetector = new GestureDetector(context, this);
         setOnTouchListener(this);
@@ -79,22 +79,22 @@ public class CustomViewPager extends ViewPager
 
         // Right
         if (45 >= angle && angle > -45) {
-            direction = 1;
+            direction = CartonSdk.RIGHT;
         } else
 
             // Down (back == up with head)
             if (-45 >= angle && angle > -135) {
-                direction = HeadRecognition.NOD_UP;
+                direction = CartonSdk.UP;
             } else
 
                 // Left
                 if (-135 >= angle && angle >= -180 || 180 >= angle && angle > 135) {
-                    direction = 0;
+                    direction = CartonSdk.LEFT;
                 } else
 
                     // Up (go == down with head)
                     if (135 >= angle && angle > 45) {
-                        direction = HeadRecognition.NOD_DOWN;
+                        direction = CartonSdk.DOWN;
                     }
 
         return direction;
