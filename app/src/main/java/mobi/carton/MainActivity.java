@@ -123,6 +123,12 @@ public class MainActivity extends CartonActivity
     }
 
 
+    private void sendDirectionToCurrentFragment(int direction) {
+        CartonFragment cartonFragment = (CartonFragment) mMenuPagerAdapter.getItem(mViewPager.getCurrentItem());
+        cartonFragment.movingDirection(direction);
+    }
+
+    
     /*
     IMPLEMENTS
      */
@@ -145,7 +151,7 @@ public class MainActivity extends CartonActivity
     // HeadRecognition.OnHeadGestureListener
     @Override
     public void onNod(int direction) {
-
+        sendDirectionToCurrentFragment(direction);
     }
 
 
@@ -159,7 +165,6 @@ public class MainActivity extends CartonActivity
     // CustomViewPager.OnScrollListener
     @Override
     public void onScroll(int direction) {
-        CartonFragment cartonFragment = (CartonFragment) mMenuPagerAdapter.getItem(mViewPager.getCurrentItem());
-        cartonFragment.movingDirection(direction);
+        sendDirectionToCurrentFragment(direction);
     }
 }

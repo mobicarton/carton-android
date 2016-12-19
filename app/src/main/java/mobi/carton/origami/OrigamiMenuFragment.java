@@ -15,66 +15,19 @@ import mobi.carton.library.HeadRecognition;
 /**
  * A fragment to show the Origami feature in the main menu
  */
-public class OrigamiMenuFragment extends CartonFragment
-        implements
-        HeadRecognition.OnHeadGestureListener {
-
-
-    private HeadRecognition mHeadRecognition;
+public class OrigamiMenuFragment extends CartonFragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mHeadRecognition = new HeadRecognition(getContext());
-        mHeadRecognition.setOnHeadGestureListener(this);
-
         return inflater.inflate(R.layout.fragment_origami_menu, container, false);
     }
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mHeadRecognition.start();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mHeadRecognition.stop();
-    }
-
-
-    @Override
-    public void onTilt(int direction) {
-
-    }
-
-
-    @Override
-    public void onNod(int direction) {
-        if (getUserVisibleHint()) {
-            actionDirection(direction);
-        }
-    }
-
-
-    @Override
-    public void onShake() {
-
-    }
-
-
-    @Override
     public void movingDirection(int direction) {
-        actionDirection(direction);
-    }
-
-
-    private void actionDirection(int direction) {
         if (direction == HeadRecognition.NOD_DOWN) {
             startActivity(new Intent(getContext(), OrigamiActivity.class));
         }

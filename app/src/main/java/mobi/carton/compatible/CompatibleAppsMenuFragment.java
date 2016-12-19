@@ -13,66 +13,19 @@ import mobi.carton.library.HeadRecognition;
 /**
  * Displays the tile dedicated to Compatible Apps in the main menu
  */
-public class CompatibleAppsMenuFragment extends CartonFragment
-        implements
-        HeadRecognition.OnHeadGestureListener {
-
-
-    private HeadRecognition mHeadRecognition;
+public class CompatibleAppsMenuFragment extends CartonFragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mHeadRecognition = new HeadRecognition(getContext());
-        mHeadRecognition.setOnHeadGestureListener(this);
-
         return inflater.inflate(R.layout.fragment_app_compatible_menu, container, false);
     }
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mHeadRecognition.start();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mHeadRecognition.stop();
-    }
-
-
-    @Override
-    public void onTilt(int direction) {
-
-    }
-
-
-    @Override
-    public void onNod(int direction) {
-        if (getUserVisibleHint()) {
-            actionDirection(direction);
-        }
-    }
-
-
-    @Override
-    public void onShake() {
-
-    }
-
-
-    @Override
     public void movingDirection(int direction) {
-        actionDirection(direction);
-    }
-
-
-    private void actionDirection(int direction) {
         if (direction == HeadRecognition.NOD_DOWN) {
             startActivity(new Intent(getContext(), CompatibleAppsActivity.class));
         }
