@@ -1,4 +1,4 @@
-package mobi.carton.tutorial;
+package mobi.carton.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;

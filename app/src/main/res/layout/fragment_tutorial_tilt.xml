@@ -20,7 +20,7 @@
             android:layout_centerHorizontal="true"/>
 
 
-        <mobi.carton.tutorial.NeedleView
+        <mobi.carton.utils.NeedleView
             android:id="@+id/needleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

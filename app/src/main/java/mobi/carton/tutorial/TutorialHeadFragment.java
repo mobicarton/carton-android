@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import mobi.carton.R;
 import mobi.carton.library.HeadRecognition;
+import mobi.carton.utils.NeedleView;
 
 
 /**
