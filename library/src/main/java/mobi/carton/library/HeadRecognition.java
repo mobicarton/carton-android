@@ -149,13 +149,20 @@ public class HeadRecognition
     /**
      * Use to calibrate nod gesture when the mobile phone is not exactly horizontal
      */
-    private int deltaNod;
+    private static int DELTA_NOD;
 
 
     /**
      * Use to save the current (last) roll angle needed for auto calibrate deltaNod
      */
     private int mRoll;
+
+
+    /**
+     * Save context and use it for saving deltaNod in preferences
+     */
+    private Context mContext;
+
 
 
     /**
@@ -168,8 +175,8 @@ public class HeadRecognition
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
         changingDirectionQueue = new LinkedList<>();
-        // TODO: by default if not define in constructor get it from saved preferences
-        deltaNod = 0;
+        HeadRecognition.DELTA_NOD = CartonPrefs.getDeltaNod(context);
+        mContext = context;
     }
 
 
@@ -219,7 +226,9 @@ public class HeadRecognition
         if (deltaNod > DELTA_NOD_MAX_ANGLE) {
             deltaNod = DELTA_NOD_MAX_ANGLE;
         }
-        this.deltaNod = deltaNod;
+
+        HeadRecognition.DELTA_NOD = deltaNod;
+        CartonPrefs.setDeltaNod(mContext, deltaNod);
     }
 
 
@@ -272,7 +281,7 @@ public class HeadRecognition
             mRoll = mRoll < 0 ? mRoll + 180 : mRoll - 180;
 
             if (mOnHeadTrackingListener != null)
-                mOnHeadTrackingListener.onDirectionChanged(azimuth, pitch, mRoll);
+                mOnHeadTrackingListener.onDirectionChanged(azimuth, pitch, mRoll + HeadRecognition.DELTA_NOD);
 
             // TODO: use directly radian instead of degree to avoid some useless computing
             if (tiltTime == -1) { // if head was straight
@@ -297,15 +306,15 @@ public class HeadRecognition
             Log.d("HeadRecognition", "Roll > " + mRoll);
 
             if (nodTime == -1) {
-                if ((mRoll + deltaNod) >= NOD_THRESHOLD) {
+                if ((mRoll + HeadRecognition.DELTA_NOD) >= NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();
                     nodSide = NOD_UP;
-                } else if ((mRoll + deltaNod) <= -NOD_THRESHOLD) {
+                } else if ((mRoll + HeadRecognition.DELTA_NOD) <= -NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();
                     nodSide = NOD_DOWN;
                 }
             }
-            if (nodTime != -1 && ((mRoll + deltaNod) <= 5 && (mRoll + deltaNod) >= -5)) {
+            if (nodTime != -1 && ((mRoll + HeadRecognition.DELTA_NOD) <= 5 && (mRoll + HeadRecognition.DELTA_NOD) >= -5)) {
                 long delay = System.currentTimeMillis() - nodTime;
                 if (delay <= NOD_TIME) {
                     if (mOnHeadGestureListener != null) {

@@ -18,6 +18,12 @@ public class CartonPrefs {
     private static final String PREF_WITHOUT_CARTON = "pref_without_carton";
 
 
+    /**
+     * Integer value to save around all the application the delta nod related to head calibration
+     */
+    private static final String PREF_DELTA_NOD = "pref_delta_nod";
+
+
 
     /**
      * Set the WithoutCarton mode preference indicating whether the app has been launched with CARTON or not.
@@ -39,5 +45,26 @@ public class CartonPrefs {
     public static boolean getWithoutCarton(final Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPreferences.getBoolean(PREF_WITHOUT_CARTON, false);
+    }
+
+
+
+    /**
+     * Set the deltaNod value related to the degree to adapt horizontal mobile phone.
+     *
+     * @param deltaNod New value that will be set.
+     */
+    public static void setDeltaNod(final Context context, final int deltaNod) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences.edit().putInt(PREF_DELTA_NOD, deltaNod).commit();
+    }
+
+
+    /**
+     * Return the deltaNod (in degree) or 0 if there isn't any.
+     */
+    public static int getDeltaNod(final Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getInt(PREF_DELTA_NOD, 0);
     }
 }
