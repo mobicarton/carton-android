@@ -87,6 +87,7 @@ public class MainActivity extends CartonActivity
 
         fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, TutorialMenuFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, CalibrateFragment.class.getName()));
 
         mMenuPagerAdapter = new MenuPagerAdapter(getSupportFragmentManager(), fragments);
 

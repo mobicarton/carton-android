@@ -7,4 +7,9 @@
 
     <color name="rms_low">#66BB6A</color>
     <color name="rms_high">#EF5350</color>
+
+    <color name="calibrate_horizontal">#CFFF</color>
+    <color name="calibrate_needle">#E91E63</color>
+    <color name="calibrate_bar">#03A9F4</color>
+
 </resources>
