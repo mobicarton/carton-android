@@ -38,9 +38,10 @@ public class CartonPrefs {
 
 
     /**
-     * Return true if user refused to sign in, false if they haven't refused (yet).
+     * Return true if the user choose to launch without Carton Viewer.
      *
      * @param context Context to be used to lookup the {@link android.content.SharedPreferences}.
+     * @return boolean, true without Carton Viewer
      */
     public static boolean getWithoutCarton(final Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -52,6 +53,7 @@ public class CartonPrefs {
     /**
      * Set the deltaNod value related to the degree to adapt horizontal mobile phone.
      *
+     * @param context  Context to be used to edit the {@link android.content.SharedPreferences}.
      * @param deltaNod New value that will be set.
      */
     public static void setDeltaNod(final Context context, final int deltaNod) {
@@ -62,6 +64,9 @@ public class CartonPrefs {
 
     /**
      * Return the deltaNod (in degree) or 0 if there isn't any.
+     *
+     * @param context Context to be used to lookup the {@link android.content.SharedPreferences}.
+     * @return deltaNod in degree
      */
     public static int getDeltaNod(final Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

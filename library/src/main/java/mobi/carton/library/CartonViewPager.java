@@ -1,7 +1,6 @@
 package mobi.carton.library;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -11,7 +10,7 @@ import android.view.View;
  * Created by damienbrun on 18/12/2016.
  */
 
-public class CartonViewPager extends ViewPager
+public class CartonViewPager extends android.support.v4.view.ViewPager
         implements
         View.OnTouchListener,
         GestureDetector.OnGestureListener {
@@ -39,9 +38,6 @@ public interface OnScrollListener {
     }
 
 
-    /**
-     * Constructor
-     */
     public CartonViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         mDetector = new GestureDetector(context, this);
@@ -70,6 +66,10 @@ public interface OnScrollListener {
 
     /**
      * Retrieve the angle of the movement and define in which direction the finger motion occurred
+     * @param x1 x coordinate of first down motion event that started the fling
+     * @param y1 y coordinate of first down motion event that started the fling
+     * @param x2 x coordinate of move motion event that triggered the current fling
+     * @param y2 y coordinate of move motion event that triggered the current fling
      * @return It return the direction (up or down)
      */
     private int getDirection(float x1, float y1, float x2, float y2) {

@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 9
-        versionName "0.0.9"
+        versionName "0.1.0"
     }
     buildTypes {
         release {
@@ -36,8 +36,8 @@ ext {
     // module. The artifact name needs to match the name of the library.
     artifact = 'library'
 
-    libraryDescription = 'The Carton SDK for Android enable you to quickly start creating AR apps or adapt your existing application for AR.'
-    libraryVersion = '0.0.9'
+    libraryDescription = 'The Carton SDK for Android enable you to quickly start creating AR apps or adapt your existing application for Carton Viewer.'
+    libraryVersion = '0.1.0'
 
     developerId = 'makowildcat'
     developerName = 'Damien Brun'

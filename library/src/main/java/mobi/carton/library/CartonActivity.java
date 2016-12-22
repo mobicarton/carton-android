@@ -61,6 +61,7 @@ public class CartonActivity extends FragmentActivity {
      * - set margin to 10 mm from top/left
      * - set screen's brightness to maximum
      * - keep the screen ON
+     * @param savedInstanceState use it only for super.OnCreate() here
      */
     @SuppressLint("RtlHardcoded")
     @Override
@@ -121,6 +122,9 @@ public class CartonActivity extends FragmentActivity {
     /**
      * Use onActivityResult to know from the Default Launcher if the app is
      * launched without Carton Viewer (in debug mode)
+     * @param requestCode The integer request code allowing us to identify it come from the Launcher
+     * @param resultCode The integer returned by the Launcher (OK or CANCELED)
+     * @param data Intent with boolean attached (defining weather or not launch with Carton Viewer)
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -183,7 +187,7 @@ public class CartonActivity extends FragmentActivity {
 
 
     /**
-     * Add a {@link MirrorFrameLayout} as parent of the {@param view} before setting
+     * Add a {@link MirrorFrameLayout} as parent of the view before setting
      * the activity content to this explicit view
      *
      * @param view The desired content to display.

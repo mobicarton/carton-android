@@ -2,7 +2,7 @@ package mobi.carton.library;
 
 
 /**
- * Utilities & constants related to the SDK
+ * Utilities and constants related to the SDK
  */
 public class CartonSdk {
 

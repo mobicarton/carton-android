@@ -1,7 +1,7 @@
 # Carton
 _turn the phone to glass of your smart device_
 
-**v0.0.9 beta**
+**v0.1.0 beta**
 
 ## Auto adaptive screens
 In order to fully use the Carton viewer, everything on the screen needs to be horizontally reversed, the brightness set the maximum, and the size and margin has to be set to respectively 60x35mm and 10x10mm (from top left).
@@ -72,7 +72,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ## Download
 ### Gradle
 ```java
-compile 'mobi.carton:library:0.0.9'
+compile 'mobi.carton:library:0.1.0'
 ```
 
 ## Contributing

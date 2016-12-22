@@ -66,6 +66,7 @@ public class LauncherActivity extends Activity
     /**
      * When user click on the link to the official website
      * then launch implicit intent
+     * @param v The view that was clicked.
      */
     public void clickVisit(View v) {
         Intent intent = new Intent();
@@ -79,6 +80,7 @@ public class LauncherActivity extends Activity
     /**
      * When user click on the button to launch app without using CARTON device
      * then set extra to return app without using any CARTON device and remove the launcher
+     * @param v The view that was clicked.
      */
     public void clickWithout(View v) {
         Intent intent = new Intent();
