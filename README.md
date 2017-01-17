@@ -1,7 +1,7 @@
 # Carton
-_turn the phone to glass of your smart device_
+_v0.1.0 - turn the phone to glass of your smart device_
 
-**v0.1.0 beta**
+__Get more information about this project on the official website [carton.mobi](http://carton.mobi)__
 
 ## Getting Started
 Either you start a new app or you adapt an existing one, there are few easy steps to do in order to fully enjoy a CARTON Viewer.
