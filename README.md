@@ -6,7 +6,7 @@ __Get more information about this project on the official website [carton.mobi](
 ## Getting Started
 Either you start a new app or you adapt an existing one, there are few easy steps to do in order to fully enjoy a CARTON Viewer.
 
-1. Add the library to your gradle app file
+1 - Add the library to your gradle app file
 ```java
 dependencies {
     ...
@@ -14,7 +14,7 @@ dependencies {
     compile 'mobi.carton:library:0.1.0'
 }
 ```
-2. Update your manifest: set the orientation of your activity (all of them) to `landscape`, add a category to make your launcher (only) activity compatible, finally, add a simple description.
+2 - Update your manifest: set the orientation of your activity (all of them) to `landscape`, add a category to make your launcher (only) activity compatible, finally, add a simple description.
 ```xml
 <application
     ...
@@ -32,13 +32,15 @@ dependencies {
     </activity>
 </application>
 ```
-3. Extend your activity with CartonActivity
+3 - Extend your activity with CartonActivity
 ```java
 public class MyActivity extends CartonActivity {
     ...
 ```
 
-## Auto adaptive screens
+## Features
+
+### Auto adaptive screens
 In order to fully use the Carton viewer, everything on the screen needs to be horizontally reversed, the brightness set the maximum, and the size and margin has to be set to respectively 60x35mm and 10x10mm (from top left).
 Carton SDK make it easy by extending `CartonActivity` class instead of `Activity`.
 
@@ -48,8 +50,7 @@ public class MainActivity extends CartonActivity {
     ...
 ```
 
-
-## Default Launcher Activity
+### Default Launcher Activity
 The default launcher provide help to the user to place the mobile phone into the Carton viewer.
 
 ```java
@@ -66,7 +67,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 ![Alt text](/misc/launcher.png?raw=true "Default Launcher")
 
-## Head Gesture Recognition
+### Head Gesture Recognition
 This library is here to help head gesture recognition when using Carton. Three kinds of gestures are available : `tilting`, `nodding`, and `shaking`.
 
 ```java
