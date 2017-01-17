@@ -5,6 +5,7 @@ __Get more information about this project on the official website [carton.mobi](
 
 ## Getting Started
 Either you start a new app or you adapt an existing one, there are few easy steps to do in order to fully enjoy a CARTON Viewer.
+
 1. Add the library to your gradle app file
 ```java
 dependencies {
