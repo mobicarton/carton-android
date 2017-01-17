@@ -3,6 +3,40 @@ _turn the phone to glass of your smart device_
 
 **v0.1.0 beta**
 
+## Getting Started
+Either you start a new app or you adapt an existing one, there are few easy steps to do in order to fully enjoy a CARTON Viewer.
+1. Add the library to your gradle app file
+```java
+dependencies {
+    ...
+
+    compile 'mobi.carton:library:0.1.0'
+}
+```
+2. Update your manifest: set the orientation of your activity (all of them) to `landscape`, add a category to make your launcher (only) activity compatible, finally, add a simple description.
+```xml
+<application
+    ...
+    android:description="@string/app_description">
+
+    <activity
+        ...
+        android:screenOrientation="landscape">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+            ...
+            <category android:name="mobi.carton.intent.category.COMPATIBLE"/>
+        </intent-filter>
+    </activity>
+</application>
+```
+3. Extend your activity with CartonActivity
+```java
+public class MyActivity extends CartonActivity {
+    ...
+```
+
 ## Auto adaptive screens
 In order to fully use the Carton viewer, everything on the screen needs to be horizontally reversed, the brightness set the maximum, and the size and margin has to be set to respectively 60x35mm and 10x10mm (from top left).
 Carton SDK make it easy by extending `CartonActivity` class instead of `Activity`.
