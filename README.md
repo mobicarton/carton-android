@@ -6,7 +6,7 @@ __Get more information about this project on the official website [carton.mobi](
 ## Getting Started
 Either you start a new app or you adapt an existing one, there are few easy steps to do in order to fully enjoy a CARTON Viewer.
 
-1 - Add the library to your gradle app file
+__1 -__ Add the library to your gradle app file
 ```java
 dependencies {
     ...
@@ -14,7 +14,7 @@ dependencies {
     compile 'mobi.carton:library:0.1.0'
 }
 ```
-2 - Update your manifest: set the orientation of your activity (all of them) to `landscape`, add a category to make your launcher (only) activity compatible, finally, add a simple description.
+__2 -__ Update your manifest: set the orientation of your activity (all of them) to `landscape`, add a category to make your launcher (only) activity compatible, finally, add a simple description.
 ```xml
 <application
     ...
@@ -32,7 +32,7 @@ dependencies {
     </activity>
 </application>
 ```
-3 - Extend your activity with CartonActivity
+__3 -__ Extend your activity with CartonActivity
 ```java
 public class MyActivity extends CartonActivity {
     ...
@@ -94,7 +94,14 @@ protected void onCreate(Bundle savedInstanceState) {
 
         @Override
         public void onNod(int direction) {
-            // ... do whatever
+            switch (direction) {
+                case HeadRecognition.NOD_DOWN:
+                    // do whatever
+                break;
+                case HeadRecognition._NOD_UP:
+                    // do whatever
+                break;
+            }
         }
 
         @Override
@@ -102,6 +109,20 @@ protected void onCreate(Bundle savedInstanceState) {
             // ... do whatever
         }
     });
+}
+
+// ...
+
+@Override
+protected void onResume() {
+    super.onResume();
+    mHeadRecognition.start();
+}
+
+@Override
+protected void onPause() {
+    super.onPause();
+    mHeadRecognition.stop();
 }
 ```
 
@@ -132,4 +153,3 @@ limitations under the License.
 
 ## Authors
 It is an open-source and open-design project, everyone is welcome or encouraged to contribute. Besides, this project is funded and supported by [Natural Sciences and Engineering Research Council](http://www.nserc-crsng.gc.ca/index_eng.asp) of Canada and [44 screens](http://44screens.com/en-us).
-44 Screens is a start-up specialized in augmented reality, mobile and wearable apps.
