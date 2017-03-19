@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.carton.CalibrateActivity;
 import mobi.carton.MenuPagerAdapter;
 import mobi.carton.R;
 import mobi.carton.ZoomOutPageTransformer;
@@ -49,6 +50,11 @@ public class TutorialActivity extends CartonActivity
         viewPager.setOnScrollListener(this);
 
         PrefUtils.setTutorialDone(this, true);
+
+        if (!PrefUtils.isCalibrationDone(this)) {
+            Intent intentCalibrate = new Intent(this, CalibrateActivity.class);
+            startActivity(intentCalibrate);
+        }
     }
 
 

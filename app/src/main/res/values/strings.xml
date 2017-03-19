@@ -73,6 +73,6 @@
     <!--
     Calibrate
     -->
-    <string name="calibrate_instruction">Head perfectly horizontal, touch the screen when you are near a zero-degree slope.</string>
+    <string name="calibrate_instruction">Head perfectly horizontal, touch (long press) the screen when you are near a zero-degree slope.</string>
 
 </resources>

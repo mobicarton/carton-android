@@ -68,6 +68,11 @@
             android:screenOrientation="landscape">
         </activity>
 
+        <activity
+            android:name=".CalibrateActivity"
+            android:screenOrientation="landscape">
+        </activity>
+
     </application>
 
 </manifest>
