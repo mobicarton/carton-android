@@ -2,7 +2,8 @@ package mobi.carton.library;
 
 
 import android.content.Context;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,7 +13,26 @@ public class TouchView extends View
         GestureDetector.OnGestureListener {
 
 
+    /**
+     * Used for receiving notifications from the Finger Touch Recognition when
+     * gesture such as swipe, or simple tap have been detected.
+     */
+    public interface OnFingerTouchGestureListener {
+
+        void onSwipe(int direction);
+    }
+
+
+    public interface OnFingerTapListener {
+
+        void onTap(boolean isLong);
+    }
+
+
+    private OnFingerTouchGestureListener mCallback;
     private GestureDetector mDetector;
+
+    private OnFingerTapListener mOnFingerTapListener;
 
 
     public TouchView(Context context) {
@@ -21,73 +41,85 @@ public class TouchView extends View
     }
 
 
+    public TouchView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        this.mDetector = new GestureDetector(context, this);
+    }
+
+
+    public TouchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        this.mDetector = new GestureDetector(context, this);
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            Log.d("TouchView", "ACTION_UP");
+            if (mOnFingerTapListener != null)
+                mOnFingerTapListener.onTap(false);
         }
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.d("TouchView", "ACTION_DOWN");
-        }
-
-        // handle long press with multiple touch only
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_POINTER_DOWN: {
-                // when the second finger touch
-                //if (event.getPointerCount() == 2) {
-                    Log.d("TouchView", "ACTION_POINTER_DOWN + " + event.getPointerCount());
-                //}
-                break;
-            }
-
-            case MotionEvent.ACTION_POINTER_UP: {
-                // when the last multiple touch is released
-                //if (event.getPointerCount() == 2) {
-                    Log.d("TouchView", "ACTION_POINTER_UP + " + event.getPointerCount());
-                //}
-                break;
-            }
-        }
-
-        return super.onTouchEvent(event);
+        return mDetector.onTouchEvent(event);
     }
 
 
+    public void setOnFingerTouchGestureListener(OnFingerTouchGestureListener callback) {
+        mCallback = callback;
+    }
+
+
+    public void setOnFingerTapListener(OnFingerTapListener l) {
+        mOnFingerTapListener = l;
+    }
+
+
+    /*
+    IMPLEMENTS
+     */
+
+
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onDown(MotionEvent e) {
         return true;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public void onShowPress(MotionEvent e) {
 
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         return false;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return false;
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public void onLongPress(MotionEvent e) {
-
+        if (mOnFingerTapListener != null)
+            mOnFingerTapListener.onTap(true);
     }
 
 
+    // GestureDetector.OnGestureListener
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        Log.d("onFling", "direction " + getDirection(e1.getX(), e1.getY(), e2.getX(), e2.getY()));
+        if (mCallback != null)
+            mCallback.onSwipe(getDirection(e1.getX(), e1.getY(), e2.getX(), e2.getY()));
         return false;
     }
 
@@ -99,22 +131,28 @@ public class TouchView extends View
 
         // Right
         if (45 >= angle && angle > -45) {
-            direction = 1;
+            if (CartonPrefs.getWithoutCarton(getContext()))
+                direction = CartonSdk.RIGHT;
+            else
+                direction = CartonSdk.LEFT;
         } else
 
             // Down (back == up with head)
             if (-45 >= angle && angle > -135) {
-                direction = HeadRecognition.NOD_UP;
+                direction = CartonSdk.DOWN;
             } else
 
                 // Left
                 if (-135 >= angle && angle >= -180 || 180 >= angle && angle > 135) {
-                    direction = 0;
+                    if (CartonPrefs.getWithoutCarton(getContext()))
+                        direction = CartonSdk.LEFT;
+                    else
+                        direction = CartonSdk.RIGHT;
                 } else
 
                     // Up (go == down with head)
                     if (135 >= angle && angle > 45) {
-                        direction = HeadRecognition.NOD_DOWN;
+                        direction = CartonSdk.UP;
                     }
 
         return direction;
