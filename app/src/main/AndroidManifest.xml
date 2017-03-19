@@ -12,7 +12,9 @@
     -->
 
     <!-- required for the speech to text feature -->
+    <!--
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    -->
 
 
     <application

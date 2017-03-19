@@ -16,7 +16,6 @@ import mobi.carton.library.CartonSdk;
 import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
 import mobi.carton.origami.OrigamiMenuFragment;
-import mobi.carton.subtitle.SubtitleFragment;
 import mobi.carton.tutorial.TutorialActivity;
 import mobi.carton.tutorial.TutorialMenuFragment;
 import mobi.carton.tutorial.Utils;
@@ -85,7 +84,7 @@ public class MainActivity extends CartonActivity
             fragments.add(Fragment.instantiate(this, CompatibleAppsMenuFragment.class.getName()));
         }
 
-        fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
+        // fragments.add(Fragment.instantiate(this, SubtitleFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, TutorialMenuFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, CalibrateFragment.class.getName()));
 

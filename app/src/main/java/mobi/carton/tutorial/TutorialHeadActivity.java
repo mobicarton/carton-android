@@ -1,6 +1,5 @@
 package mobi.carton.tutorial;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -82,8 +81,10 @@ public class TutorialHeadActivity extends CartonActivity implements
     private void actionDirection(int direction) {
         switch (direction) {
             case HeadRecognition.NOD_DOWN:
+                /*
                 Intent intent = new Intent(this, TutorialSpeechActivity.class);
                 startActivity(intent);
+                */
                 break;
             case HeadRecognition.NOD_UP:
                 onBackPressed();
