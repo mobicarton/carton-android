@@ -6,7 +6,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import java.util.LinkedList;
 
@@ -303,8 +302,7 @@ public class HeadRecognition
             }
 
             // TODO : the same as Tilt, should create a method
-            Log.d("HeadRecognition", "Roll > " + mRoll);
-
+            
             if (nodTime == -1) {
                 if ((mRoll + HeadRecognition.DELTA_NOD) >= NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();
