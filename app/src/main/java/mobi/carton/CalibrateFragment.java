@@ -83,7 +83,7 @@ public class CalibrateFragment extends CartonFragment
         if (getUserVisibleHint()) {
             mNeedleView.setAngle(roll + 90);
             int value = (int) Math.sqrt(roll * roll);
-            mTextViewTracking.setText(String.format("%d", value));
+            mTextViewTracking.setText(String.format("%d°", value));
         }
     }
 

@@ -69,4 +69,10 @@
     <string name="tutorial_step_5">This icon means you can navigate just by saying "Next/Previous". The other gestures are still available.</string>
     <string name="tutorial_step_6">You can go further or return with "OK/Cancel". From here going further will finish the tutorial!</string>
 
+
+    <!--
+    Calibrate
+    -->
+    <string name="calibrate_instruction">Head perfectly horizontal, touch the screen when you are near a zero-degree slope.</string>
+
 </resources>
