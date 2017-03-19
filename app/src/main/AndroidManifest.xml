@@ -6,8 +6,10 @@
     <!-- permission -->
 
     <!-- required for the (GoogleGlass-alike) compass -->
+    <!--
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    -->
 
     <!-- required for the speech to text feature -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

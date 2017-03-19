@@ -28,10 +28,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -215,6 +213,7 @@ public class OrientationManager {
                     mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
                     SensorManager.SENSOR_DELAY_UI);
 
+            /*
             Location lastLocation = mLocationManager
                     .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
             if (lastLocation != null) {
@@ -224,19 +223,22 @@ public class OrientationManager {
                     updateGeomagneticField();
                 }
             }
+            */
 
             Criteria criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_FINE);
             criteria.setBearingRequired(false);
             criteria.setSpeedRequired(false);
 
-            List<String> providers =
-                    mLocationManager.getProviders(criteria, true /* enabledOnly */);
+
+            // List<String> providers = mLocationManager.getProviders(criteria, true /* enabledOnly */);
+            /*
             for (String provider : providers) {
                 mLocationManager.requestLocationUpdates(provider,
                         MILLIS_BETWEEN_LOCATIONS, METERS_BETWEEN_LOCATIONS, mLocationListener,
                         Looper.getMainLooper());
             }
+            */
 
             mTracking = true;
         }
@@ -249,7 +251,7 @@ public class OrientationManager {
     public void stop() {
         if (mTracking) {
             mSensorManager.unregisterListener(mSensorListener);
-            mLocationManager.removeUpdates(mLocationListener);
+            //mLocationManager.removeUpdates(mLocationListener);
             mTracking = false;
         }
     }
