@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion '25.0.0'
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 9
         versionName "0.1.0"
     }
@@ -48,5 +48,5 @@ apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/insta
 apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/bintrayv1.gradle'
 
 dependencies {
-    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:support-v4:25.3.0'
 }
