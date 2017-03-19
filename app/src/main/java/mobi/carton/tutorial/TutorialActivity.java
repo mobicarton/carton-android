@@ -14,6 +14,7 @@ import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
+import mobi.carton.utils.PrefUtils;
 
 
 /**
@@ -47,7 +48,7 @@ public class TutorialActivity extends CartonActivity
 
         viewPager.setOnScrollListener(this);
 
-        Utils.setTutorialDone(this, true);
+        PrefUtils.setTutorialDone(this, true);
     }
 
 

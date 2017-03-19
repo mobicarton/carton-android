@@ -302,7 +302,7 @@ public class HeadRecognition
             }
 
             // TODO : the same as Tilt, should create a method
-            
+
             if (nodTime == -1) {
                 if ((mRoll + HeadRecognition.DELTA_NOD) >= NOD_THRESHOLD) {
                     nodTime = System.currentTimeMillis();

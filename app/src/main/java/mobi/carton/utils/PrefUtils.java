@@ -1,4 +1,4 @@
-package mobi.carton.tutorial;
+package mobi.carton.utils;
 
 
 import android.content.Context;
@@ -7,9 +7,9 @@ import android.preference.PreferenceManager;
 
 
 /**
- * Utilities and constants related to tutorial preference
+ * Utilities and constants related to preferences
  */
-public class Utils {
+public class PrefUtils {
 
 
     /**

@@ -12,6 +12,7 @@ import mobi.carton.ZoomOutPageTransformer;
 import mobi.carton.library.CartonActivity;
 import mobi.carton.library.CartonViewPager;
 import mobi.carton.library.HeadRecognition;
+import mobi.carton.utils.PrefUtils;
 
 
 /**
@@ -60,7 +61,7 @@ public class TutorialHeadActivity extends CartonActivity implements
         mHeadRecognition = new HeadRecognition(this);
         mHeadRecognition.setOnHeadGestureListener(this);
 
-        Utils.setTutorialDone(this, true);
+        PrefUtils.setTutorialDone(this, true);
     }
 
 
