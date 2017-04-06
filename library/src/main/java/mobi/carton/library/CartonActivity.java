@@ -238,6 +238,18 @@ public class CartonActivity extends FragmentActivity {
     }
 
 
+    /**
+     * Called to start a custom launcher, usually one at the beginning (during onCreate)
+     * @param c Activity class to launch
+     */
+    public void startCustomLauncher(Class c) {
+        if (!mNoLauncher) {
+            Intent intent = new Intent(this, c);
+            startActivityForResult(intent, LauncherActivity.CODE_LAUNCHER);
+        }
+    }
+
+
     /*public void addTouchView() {
         if (!mTouchAdded) {
             mTouchAdded = true;
