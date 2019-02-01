@@ -22,20 +22,20 @@ public class CartonActivity extends FragmentActivity {
 
 
     /**
-     * Use to pass in the intent if the app is launch with or without Carton Viewer (debug mode)
+     * Use to pass in the intent if the app is launched with or without Carton Viewer (debug mode)
      */
     public static final String EXTRA_WITHOUT_CARTON = "extra_without_carton";
 
 
     /**
-     * Use to pass in the intent if the default launcher has to be launch or not
+     * Use to pass in the intent if the default launcher has to be launched or not
      */
     public static final String EXTRA_NO_LAUNCHER = "extra_no_launcher";
 
 
     /**
      * Debug mode (when true) is used to launch the application without the horizontal reverse
-     * It is convenient for developer to try and check some interface design quickly.
+     * It is convenient for developers to try and check some interface design quickly.
      */
     private boolean mDebug = false;
 
@@ -44,10 +44,6 @@ public class CartonActivity extends FragmentActivity {
      * NoLauncher is used internally to prevent activity to launch the default Launcher
      */
     private boolean mNoLauncher;
-
-
-    //private TouchView mTouchView;
-    //private boolean mTouchAdded;
 
 
     /*
